@@ -1,0 +1,65 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-image: linear-gradient(#55a2d6, 
+    rgba(4,9,30,0.7));
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.container {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 600px; /* Adjust width to your needs */
+    padding: 20px;
+    background-image: linear-gradient(#176B87, rgba(8, 43, 55, 0.7));
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+}
+
+h3{
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #000;
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row.g-3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center-align all columns */
+}
+
+.col-md-6 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Space between rows */
+    padding-right: 10px; /* Space between columns */
+}
+
+.col-md-6:nth-of-type(odd) {
+    padding-right: 0; /* Remove right padding for odd columns to avoid extra spacing */
+}
+
+.col-md-6 input,
+.col-md-6 select {
+    width: 100%; /* Make inputs and selects fill the column width */
+}
+
+.col-4 {
+    display: flex;
+    justify-content: center; /* Center-align the button horizontally */
+    margin-top: 15px; /* Add margin to the top of the button container */
+}
+
+.btn-primary {
+    width: auto; /* Button width adjusted to its content */
+}
+
+label{
+    font-weight: bold;
+}
