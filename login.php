@@ -1,13 +1,9 @@
-<?php
-// include('layout/header.php');
-//include('layout/left.php');
-// ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include('database/connection.php');             //Database Connection Included
+include('database/connection.php');             //Database Connection
 
 session_start();
 // Check if the user is already logged in
@@ -26,8 +22,8 @@ if (isset($_POST['login'])) {
     $sql = "";
     if ($userselects == "customer") {
         $sql = "SELECT * FROM customer WHERE email = ?";
-    } elseif ($userselects == "delivery person") {
-        $sql = "SELECT * FROM deliveryperson WHERE email = ?";
+    } elseif ($userselects == "delivery_person") {
+        $sql = "SELECT * FROM delivery_person WHERE email = ?";
     }
 
     // Prepares the SQL statement, binds the email parameter, executes the statement, and retrieves the result.
@@ -43,7 +39,7 @@ if (isset($_POST['login'])) {
 
         if (password_verify($password, $hashedpassword)) {
             // Check if the counsellor is approved
-            if ($userselects == "delivery person" && $row['status'] !== 'Approved') {
+            if ($userselects == "delivery_person" && $row['status'] !== 'Approved') {
                 // Display message and prevent login
                 // echo "Wait for admin approval. You cannot log in at the moment.";
                 echo '<script>
@@ -64,9 +60,9 @@ if (isset($_POST['login'])) {
                 $_SESSION['usertype'] = $userselects;
 
                 if ($userselects == "customer") {
-                    header("location: #");
-                } elseif ($userselects == "delivery person") {
-                    header("location: #");
+                    header("location: customer/customer_panel.php");
+                } elseif ($userselects == "delivery_person") {
+                    header("location: delivery_person/dp_dashboard.php");
                 }
                 exit;
             }
@@ -108,9 +104,9 @@ if (isset($_POST['login'])) {
                     <input type="radio" name="userselects" id="customer" value="customer" checked>
                     <label for="customer">Customer</label>
                 </div>
-                <div class="deliveryperson-part">
-                    <input type="radio" name="userselects" id="deliveryperson" value="deliveryperson">
-                    <label for="deliveryperson">Delivery Person</label>
+                <div class="delivery_person-part">
+                    <input type="radio" name="userselects" id="delivery_person" value="delivery_person">
+                    <label for="delivery_person">Delivery Person</label>
                 </div> 
             </div>
 

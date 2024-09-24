@@ -133,7 +133,7 @@ body{
     gap: 3%;
   }
   
-  .customer-part, .deliveryperson-part{
+  .customer-part, .delivery_person-part{
     flex-basis: 50%;
     display: flex;
     align-items: center;
@@ -161,7 +161,7 @@ body{
   }
   
   .customer-part input[type="radio"]:checked +label,
-  .deliveryperson-part input[type="radio"]:checked +label{
+  .delivery_person-part input[type="radio"]:checked +label{
     background-color: #01896e;
     border-color: #01896e;
     color: #fff;
