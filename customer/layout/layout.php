@@ -30,7 +30,8 @@
                     <a href="#" class="nav-link text-white"><i class="fa-solid fa-user"></i> Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                <a href="../logout.php" class="nav-link text-white"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+
                 </li>
             </ul>
         </nav>

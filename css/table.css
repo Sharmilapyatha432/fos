@@ -1,0 +1,102 @@
+/* Container for the table */
+.table-wrapper {
+    width: 100%;
+    margin: 20px 0;
+    overflow-x: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+.fl-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+/* Header cells */
+.fl-table th {
+    background-color: #00636E; /* Header background color */
+    color: white; /* Text color */
+    padding: 12px 15px;
+    text-align: center;
+}
+
+/* Data cells */
+.fl-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Alternate row colors */
+.fl-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Table row hover effect */
+.fl-table tr:hover {
+    background-color: #ddd;
+}
+
+/* No items found */
+.fl-table td[colspan="7"] {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+/* Responsive table */
+@media screen and (max-width: 600px) {
+    .fl-table th, .fl-table td {
+        font-size: 14px;
+    }
+}
+
+/* Button container for Edit/Delete */
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Button styling */
+.button-row input[type="submit"] {
+    background-color: #00636E; /* Button background color */
+    color: white; /* Button text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.button-row input[type="submit"]:hover {
+    background-color: #004d58; /* Darker color on hover */
+}
+
+/* Add Food Button */
+input[name="add"] {
+    background-color: #4CAF50; /* Green color for Add button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Add Food button hover effect */
+input[name="add"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Button alignment */
+input[type="submit"] {
+    margin: 10px 0;
+}
