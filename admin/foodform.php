@@ -1,8 +1,3 @@
-<!------------------------------------- Not Needed ------------------------------------>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,13 +29,14 @@ include('../database/connection.php');
 // $sql = "SELECT * FROM foodcategories";
 // $categories = $conn->query($sql);
 
-// Add food items when the form is submitted if (isset($_POST['submit'])) {
-    $foodname = $_POST['name'];
-    $fooddescription = $_POST['description'];
+// Add food items when the form is submitted
+if (isset($_POST['submit'])) {
+    $foodname = $_POST['foodname'];
+    $fooddescription = $_POST['fooddescription'];
     $price = $_POST['price'];
     $category_id = $_POST['category_id'];
 
-
+    // Validate form fields
     if (empty($foodname) || empty($fooddescription) || empty($price) || empty($category_id)) {
         ?>
         <script>
@@ -54,12 +50,11 @@ include('../database/connection.php');
         </script>
         <?php
     } else {
-        // Prepare the SQL query to avoid SQL injection issues
-        $stmt = $conn->prepare("INSERT INTO fooditem (name, description, price, category_id) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssdi", $foodname, $fooddescription, $price, $category_id);
+        // Insert food data into the database with category
+        $sql = "INSERT INTO fooditem (name, description, price, category_id) VALUES ('$foodname', '$fooddescription', '$price', '$category_id')";
+        $result = $conn->query($sql);
 
-        // Execute and check if it succeeded
-        if ($stmt->execute()) {
+        if ($result) {
             ?>
             <script>
                 Swal.fire({
@@ -74,19 +69,16 @@ include('../database/connection.php');
             </script>
             <?php
         } else {
-            // Error logging
             echo "<script>
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Error: " . $stmt->error . "',
+                        text: 'Error: <?php echo $conn->error; ?>',
                     });
                   </script>";
         }
-        $stmt->close(); // Close the prepared statement
     }
-
-
+}
 
 ?>
 
@@ -98,7 +90,7 @@ include('../database/connection.php');
     <input type="text" name="name" placeholder="Food Item Name" required>
     <label for="fooddescription" class="fdes">Food Description</label>
     <textarea name="description" placeholder="Description"></textarea>
-    <label for="price" class="price">Price</label>
+    <label for="price" class="price">Food Description</label>
     <input type="number" name="price" placeholder="Price" required>
 <!--     <input type="number" name="stock" placeholder="Stock" required> -->
     <label for="category_id">Select Category</label>
@@ -114,7 +106,7 @@ include('../database/connection.php');
     </select>
 <!--     <input type="text" name="image_url" placeholder="Image URL"> -->
 </div>
-    <button type="submit">Add Food Items</button>
+    <button type="submit">Add Category</button>
     <button><a href="adminpanel.php">Back</a></button>
 </form>
     </div>
@@ -122,7 +114,7 @@ include('../database/connection.php');
 <?php
 //Display Foods Under Specific Categories
 // Fetch category ID from the URL
-//$category_id = $_GET['category_id'];
+$category_id = $_GET['category_id'];
 
 // Fetch food items under the selected category
 // $sql = "SELECT * FROM fooditem WHERE category_id = $category_id";
