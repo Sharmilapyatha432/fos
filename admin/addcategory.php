@@ -10,7 +10,7 @@ if (!isset($_SESSION['adminname'])) {
 //Add Product
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
-    $query = "INSERT INTO foodcategory (name) VALUES ('$name')";
+    $query = "INSERT INTO foodcategory (category_name) VALUES ('$name')";
     mysqli_query($conn, $query);
     header("Location: adminpanel.php");
 }

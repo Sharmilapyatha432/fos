@@ -41,7 +41,7 @@ $result = $conn->query($sql);
     <?php if (!isset($_POST['add'])) { ?>
         <h1 align="center">List of Food Items</h1>
         <div class="table-wrapper">
-            <form action="foodform.php" method="post">
+            <form action="add_fooditem.php" method="post">
                 <input type="submit" value="Add Food" name="add">
             </form>
             <table class="fl-table">

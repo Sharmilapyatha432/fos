@@ -21,7 +21,7 @@
                     <a href="#" class="nav-link text-white"><i class="fa-solid fa-house"></i> Dashboard</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a href="#" class="nav-link text-white"><i class="fa-solid fa-bowl-food"></i> Food Items</a>
+                    <a href="viewfooditem.php" class="nav-link text-white"><i class="fa-solid fa-bowl-food"></i> Food Items</a>
                 </li>
                 <li class="nav-item mb-3">
                     <a href="#" class="nav-link text-white"><i class="fa-solid fa-box"></i> My Orders</a>

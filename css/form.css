@@ -1,0 +1,99 @@
+/* Container for the form */
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style for all labels */
+.container label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Style for inputs and textarea */
+.container input[type="text"], 
+.container input[type="number"], 
+.container textarea, 
+.container select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #555;
+    transition: border-color 0.3s;
+}
+
+.container input[type="text"]:focus, 
+.container input[type="number"]:focus, 
+.container textarea:focus, 
+.container select:focus {
+    border-color: #5d8ffc;
+    outline: none;
+}
+
+/* Style for textarea */
+.container textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+/* Style for buttons */
+.container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #5d8ffc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.container button:hover {
+    background-color: #4a73d1;
+}
+
+/* Link inside the button */
+.container button a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+/* Style for the image upload field */
+.container input[type="file"] {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container input[type="file"]:hover {
+    border-color: #5d8ffc;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .container button {
+        padding: 10px;
+    }
+}
