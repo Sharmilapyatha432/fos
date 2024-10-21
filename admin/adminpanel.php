@@ -14,7 +14,7 @@ session_start();  // Start the session
 
 if (!isset($_SESSION['adminname'])) {
     // If admin is not logged in, redirect to the login page
-    header("Location: admin_login.php");
+    header("Location: adminlogin.php");
     exit();
 }
 
@@ -22,12 +22,13 @@ if (!isset($_SESSION['adminname'])) {
 // include('../database/connection.php');
 
 // Fetch orders
-$order_query = "SELECT o.order_id, o.cid AS customer_id, o.total_price, o.status, o.created_at, 
-                oi.order_item_id, oi.product_id, p.name AS product_name, oi.quantity, oi.price
+$order_query = "SELECT o.order_id, o.customer_id AS cid, o.total_amount, o.delivery_status, o.order_date, 
+                od.order_details_id, od.food_id, f.name AS food_name, od.quantity, od.price
                 FROM orders o 
-                JOIN orderitems oi ON o.order_id = oi.order_id
-                JOIN products p ON oi.product_id = p.product_id
+                JOIN orderdetails od ON o.order_id = od.order_id
+                JOIN fooditem f ON od.food_id = f.food_id
                 ORDER BY o.order_id";
+
 $orders = mysqli_query($conn, $order_query);
 
 if (!$orders) {
@@ -35,11 +36,11 @@ if (!$orders) {
     die("Query Failed: " . mysqli_error($conn));
 }
 
-include('../admin/layout/adminheader.php');
+// include('../admin/layout/header.php');
 ?>
 
 
-<link rel="stylesheet" href="../css/adminpanel.css">
+<link rel="stylesheet" href="../css/admin_table.css">
 <div class="main-content">
     <h2 align="center">Orders List</h2>
     <table class="table">
@@ -61,21 +62,21 @@ include('../admin/layout/adminheader.php');
         <?php while ($order = mysqli_fetch_assoc($orders)) { ?>
             <tr>
                 <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                <td><?php echo htmlspecialchars($order['order_item_id']); ?></td>
-                <td><?php echo htmlspecialchars($order['created_at']); ?></td>
-                <td><?php echo htmlspecialchars($order['customer_id']); ?></td>
-                <td><?php echo htmlspecialchars($order['product_id']); ?></td>
-                <td><?php echo htmlspecialchars($order['product_name']); ?></td>
+                <td><?php echo htmlspecialchars($order['order_details_id']); ?></td>
+                <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+                <td><?php echo htmlspecialchars($order['cid']); ?></td>
+                <td><?php echo htmlspecialchars($order['food_id']); ?></td>
+                <td><?php echo htmlspecialchars($order['food_name']); ?></td>
                 <td><?php echo htmlspecialchars($order['quantity']); ?></td>
-                <td><?php echo htmlspecialchars($order['total_price']); ?></td>
-                <td><?php echo htmlspecialchars($order['status']); ?></td>
+                <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
+                <td><?php echo htmlspecialchars($order['delivery_status']); ?></td>
                 <td> 
                     <form action="update_order_status.php" method="POST">
                         <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
-                        <select name="status" onchange="this.form.submit()" class="form-select" <?php if ($order['status'] == 'canceled' || $order['status'] == 'delivered') echo 'disabled'; ?>>
+                        <select name="delivery_status" onchange="this.form.submit()" class="form-select" <?php if ($order['delivery_status'] == 'canceled' || $order['delivery_status'] == 'delivered') echo 'disabled'; ?>>
                             <option value="" disable selected>Order Status</option>
-                            <option value="shipped" <?php if ($order['status'] == 'shipped') echo 'selected'; ?>>Shipped</option>
-                            <option value="delivered" <?php if ($order['status'] == 'delivered') echo 'selected'; ?>>Delivered</option>
+                            <option value="shipped" <?php if ($order['delivery_status'] == 'shipped') echo 'selected'; ?>>Shipped</option>
+                            <option value="delivered" <?php if ($order['delivery_status'] == 'delivered') echo 'selected'; ?>>Delivered</option>
                         </select>
                     </form>
 
@@ -86,7 +87,7 @@ include('../admin/layout/adminheader.php');
                         </button>
                     <?php else: ?>
                         <button type="button" class="btn btn-secondary" disabled>
-                        <?php echo ($order['status'] == 'canceled') ? 'Canceled' : 'Cannot be Cancel'; ?>
+                        <?php echo ($order['delivery_status'] == 'canceled') ? 'Canceled' : 'Cannot be Cancel'; ?>
                         </button>
                     <?php endif; ?>
                     

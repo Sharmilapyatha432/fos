@@ -1,18 +1,43 @@
 <?php
 session_start();
-include('../database/connection.php'); //Database Connection
-
+include('../database/connection.php'); // Database Connection
 
 if (!isset($_SESSION['adminname'])) {
     header("Location: adminlogin.php");
+    exit();
 }
 
-//Add Product
+// Add Product
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'];
-    $query = "INSERT INTO foodcategory (category_name) VALUES ('$name')";
-    mysqli_query($conn, $query);
-    header("Location: adminpanel.php");
+    if (isset($_POST['category_name']) && !empty(trim($_POST['category_name']))) {
+        $name = trim($_POST['category_name']);
+        
+        // Check if the category already exists
+        $checkQuery = $conn->prepare("SELECT * FROM foodcategory WHERE category_name = ?");
+        $checkQuery->bind_param("s", $name);
+        $checkQuery->execute();
+        $result = $checkQuery->get_result();
+
+        if ($result->num_rows > 0) {
+            echo "<script>alert('Category already exists.');</script>";
+        } else {
+            // Prepare and execute the insert statement
+            $insertQuery = $conn->prepare("INSERT INTO foodcategory (category_name) VALUES (?)");
+            $insertQuery->bind_param("s", $name);
+            if ($insertQuery->execute()) {
+                header("Location: categories.php");
+                exit();
+            } else {
+                echo "<script>alert('Error adding category.');</script>";
+            }
+        }
+
+        $checkQuery->close();
+        $insertQuery->close();
+    } 
+    // else {
+    //     echo "<script>alert('Category name cannot be empty.');</script>";
+    // }
 }
 ?>
 
@@ -88,11 +113,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="post" action="addcategory.php">
             <div class="mb-3">
                 <label for="category">Category Name:</label>
-                <input type="text" name="name" placeholder="Enter Category Name" required>
+                <input type="text" name="category_name" placeholder="Enter Category Name" required>
             </div>
             <button type="submit">Add Category</button>
             <div class="back-button">
-                <a href="adminpanel.php">Back</a>
+                <a href="categories.php">Back</a>
             </div>
         </form>
     </div>

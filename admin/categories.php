@@ -1,0 +1,99 @@
+<?php
+include('../admin/layout/header.php');
+include('../admin/layout/sidebar_menu.php');
+
+// Check if the user is logged in; redirect to login page if not logged in
+session_start();
+if (!isset($_SESSION['adminname'])) {
+    header("location:adminlogin.php");
+    exit; // It's good practice to call exit after a header redirect
+}
+$adminname = $_SESSION['adminname'];
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Database connection
+include("../database/connection.php");
+
+// Edit Category
+// if (isset($_POST['edit'])) {
+//     $category_id = $_POST['category_id'];
+//     header("Location: edit_category.php?category_id=" . $category_id);
+//     exit; // Redirect to edit category page
+// }
+
+// Delete Category
+if (isset($_POST['delete'])) {
+    $category_id = $_POST['category_id'];
+    $sql = "DELETE FROM foodcategory WHERE category_id='$category_id'";
+    $result = $conn->query($sql);
+    if ($result) {
+        header("Location: categories.php");
+        exit; // Redirect after deletion
+    } else {
+        die("Error: " . $conn->error);
+    }
+}
+
+// Query to get the Categories List
+$category_query = "SELECT * FROM foodcategory"; // Corrected SQL query
+
+// Execute the query
+$category_result = mysqli_query($conn, $category_query);
+
+// Check if query succeeded
+if (!$category_result) {
+    die("Query Failed: " . mysqli_error($conn));
+}
+?>
+
+<link rel="stylesheet" href="../css/table.css">
+<div class="main-content">
+    <h1 align="center">List of Categories</h1>
+    <div class="table-wrapper">
+        <form action="addcategory.php" method="post">
+            <input type="submit" value="Add category" name="add">
+        </form>
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>Category ID</th>
+                    <th>Category Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($category_result && $category_result->num_rows > 0) {
+                    while ($row = $category_result->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['category_id']); ?></td>
+                            <td><?php echo htmlspecialchars($row['category_name']); ?></td> <!-- Corrected field name -->
+                            <td>
+                                <div class="button-row">
+                                    <!-- <form method="post" action="addcategory.php" style="display:inline;">
+                                        <input type="hidden" value="<?php //echo $row['category_id']; ?>" name="category_id" />
+                                        <input type="submit" value="Add category" name="add" />
+                                    </form> -->
+                                    <form method="post" action=" " style="display:inline;">
+                                        <input type="hidden" value="<?php echo $row['category_id']; ?>" name="category_id" />
+                                        <input type="submit" class="btn-danger" value="Delete" name="delete"
+                                        onclick="return confirm('Are you sure you want to delete this category?');"
+                                        style="background-color: red; color: white; border: none; cursor: pointer;" 
+                                        onmouseover="this.style.backgroundColor='darkred';" 
+                                        onmouseout="this.style.backgroundColor='red';" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php }
+                } else { ?>
+                    <tr>
+                        <td colspan="3">No Category Listed.</td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
