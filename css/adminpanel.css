@@ -1,21 +1,104 @@
-*{
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1f1f1f;
+  color: white;
+}
+
+.logo img {
+  width: 40px;
+  height: auto;
+}
+
+.nav-links {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #c4c4c4;
+  font-size: 0.9em;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+.nav-links a i {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.nav-links a span {
+  font-size: 0.85em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *{
     margin: 0px;
     padding: 0px;
 }
 body{
-    /* background-color: aquamarine; */
+    /* background-color: aquamarine; 
     display: flex;
     flex-direction: column;
-    min-height: 100%;
-}
+    min-height: 100%; */
+/* } */
 /* CSS for header section */
-.header {
+/* .header {
     position: sticky;
     top: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #FD8D14;  /*Change this color*/
+    background-color: #FD8D14;  /*Change this color
     color: #fff;
     padding: 10px;
     height: 35px;
@@ -43,26 +126,26 @@ body{
 .profile a:hover {
     background-color: #f44336;
     color: #fff;
-}
+} */
 
 
-/* CSS for main section */
+/* CSS for main section 
 .main-section {
     display: flex;
     background-color: #C4F4E7;
-    /* width: 80%; */
+    /* width: 80%; 
 }
 
 /* CSS for sidebar */
-.sidebar {
-  background-color: #C51605;    /*Change this color*/
+/* .sidebar {
+  background-color: #C51605;    /*Change this color
   width: 20%;
   padding: 20px;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  /* position: fixed; */
+  overflow: hidden;*/
+  /* position: fixed; 
 }
 
 strong  a {
@@ -82,7 +165,7 @@ strong  a {
   padding: 10px;
   flex-grow: 1;
   overflow-y: auto;
-}
+} */
 
 /* #left .ol_ol li {
   margin-bottom: 10px;
@@ -90,13 +173,13 @@ strong  a {
   text-align: center;
 } */
 
-.sidebar .menu li {
+/* .sidebar .menu li {
   padding: 15px;
   border-bottom: 1px solid #bdb8d7;
   border-bottom: 1px solid rgba(0,0,0,0.05);
   border-top: 1px solid rgba(255,255,255,0.05);
   list-style: none;
-}
+} */
 
 /* #left .ol_ol li a {
   text-decoration: none;
@@ -105,23 +188,23 @@ strong  a {
   display: block;
 } */
 
-.sidebar .menu a {
+/* .sidebar .menu a {
   color: #333;
   display: block;
-}
+} */
 
 /* #left .ol_ol li a:hover {
   color: #007bff;
 } */
-
+/* 
 .sidebar .menu li:hover{
-  background-color: #FFE17B;            /*Change this color*/
-  border-radius: 20px;
-}
+  background-color: #FFE17B;            Change this color
+   border-radius: 20px;
+} 
     
 .sidebar .menu li:hover a{
   color: #fff;
-}
+} */
 
 /* Styles for the right container */
 /* #right { */
@@ -146,15 +229,15 @@ strong  a {
   } */
   
 /* CSS for dropdown */
-.dropdown{
+/* .dropdown{
   position: relative;
   cursor: pointer;
 }
 
-.dropdown > button{
+.dropdown > button{ */
   /* width: 170px; */
   /* height: 60px; */
-  border: 0;
+  /* border: 0;
   border-radius: 6px;
   font-family: inherit;
   font-size: 17px;
@@ -167,17 +250,17 @@ strong  a {
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 60px; */
   /* padding: 0 16px; */
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  text-decoration: underline;
+  text-decoration: underline; */
   /* color: #f7f7f7; */
-}
+/* } */
 
-.dropdown > .content > p{
+/* .dropdown > .content > p{
   padding-bottom: 20%;
 }
 
@@ -225,11 +308,11 @@ strong  a {
   opacity: 0;
   scale: 0.85;
   /* background: linear-gradient(#ea8d8d, #a890fe); */
-  background: #00636E;
+  /* background: #00636E;
   transition: 0.3s;
-}
+} */
 
-.dropdown:hover > .menu{
+/* .dropdown:hover > .menu{
   visibility: visible;
   opacity: 1;
   scale: 1;
@@ -251,13 +334,13 @@ strong  a {
   padding: 10px;
 }
 
-.dropdown > .menu >a:hover{
+.dropdown > .menu >a:hover{ */
   /* background: rgba(0 0 0 / 10%); */
-    background-color: #C4F4E7;
-}
+    /* background-color: #C4F4E7;
+} */
 
 /* CSS for footer section */
-#footer {
+/* #footer {
     background-color: #f0f0f0;
     padding: 20px;
     text-align: center;
@@ -295,7 +378,7 @@ strong  a {
     margin-top: 20px;
     font-size: 14px;
     color: #777;
-}
+} */
 
 
 

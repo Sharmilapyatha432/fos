@@ -1,6 +1,6 @@
 <?php
 include('../admin/layout/header.php');
-include('../admin/layout/sidebar_menu.php');
+// include('../admin/layout/sidebar_menu.php');
 
 // Check if the user is logged in; redirect to login page if not logged in
 session_start();
@@ -48,7 +48,8 @@ if (!$category_result) {
 }
 ?>
 
-<link rel="stylesheet" href="../css/table.css">
+<link rel="stylesheet" href="../css/admin_table.css">
+<link rel="stylesheet" href="../css/adminpanel.css">
 <div class="main-content">
     <h1 align="center">List of Categories</h1>
     <div class="table-wrapper">

@@ -15,72 +15,36 @@ if (!isset($_SESSION['email'])) {
 
 $email = $_SESSION['email'];
 
-// Add to cart functionality
-if (isset($_POST['addtocart'])) {
-    $food_id = intval($_POST['food_id']);
-    $quantity = intval($_POST['quantity']);
-
-    // Fetch product details to verify stock
-    $stmt = $conn->prepare("SELECT name, description, price FROM fooditems WHERE food_id = ?");
-    $stmt->bind_param("i", $food_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $product = $result->fetch_assoc();
-
-    //if ($fooditems['stock'] >= $quantity) {
-        // Sanitize inputs
-        $name = $conn->real_escape_string($fooditems['name']);
-        $description = $conn->real_escape_string($fooditems['description']);
-        $price = $conn->real_escape_string($fooditems['price']);
-
-        // Insert into cart
-        $sql = "INSERT INTO cart (fooditems_id, name, description, price, quantity) VALUES ('$food_id', '$name', '$description', '$price', '$quantity')";
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('Food added to cart successfully');</script>";
-            header("Location: cart.php");
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    
-    }
-//}
-
-// Fetch all products
-$sql = "SELECT food_id, name, description, price FROM fooditem";
+// Fetch all food items
+$sql = "SELECT food_id, name, description, price, image FROM fooditem";
 $result = $conn->query($sql);
 ?>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <div class="container mt-5">
-    <h1 class="mb-4">Avaliable food items</h1>
+    <h1 class="mb-4">Available Food Items</h1>
     <div class="row">
         <?php if ($result && $result->num_rows > 0) { 
             while ($row = $result->fetch_assoc()) { ?>
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="<?php echo htmlspecialchars($row['image_url']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($row['name']); ?>" />
+                    <img src="<?php echo !empty($row['image']) ? htmlspecialchars($row['image']) : 'path/to/default-image.jpg'; ?>" 
+                         class="card-img-top" 
+                         alt="<?php echo htmlspecialchars($row['name']); ?>" />
                     <div class="card-body">
                         <h5 class="card-title"><?php echo htmlspecialchars($row['name']); ?></h5>
                         <p class="card-text"><?php echo htmlspecialchars($row['description']); ?></p>
-                        <p class="card-text"><strong>Price: $<?php echo htmlspecialchars($row['price']); ?></strong></p>
-                        <p class="card-text">
-                            
-                            <?php //endif; ?>
-                        </p>
-                        
-                            <form method="post" action="#">
-                                <input type="hidden" name="food_id" value="<?php echo $row['food_id']; ?>">
-                                <div class="mb-3">
-                                    <label for="quantity" class="form-label">Quantity:</label>
-                                    <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" max="<?php echo $row['stock']; ?>" required>
-                                </div>
-                                <button type="submit" name="addtocart" class="btn btn-primary w-100">Add to Cart</button>
-                            </form>
-                        <?php //else: ?>
-                           
-                        <?php //endif; ?>
+                        <p class="card-text"><strong>Price: NRs.<?php echo htmlspecialchars($row['price']); ?></strong></p>
+
+                        <form method="post" action="placeorder.php">
+                            <input type="hidden" name="food_id" value="<?php echo $row['food_id']; ?>">
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">Quantity:</label>
+                                <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" required>
+                            </div>
+                            <button type="submit" name="placeorder" class="btn btn-primary w-100">Place Order</button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ include('database/connection.php');             //Database Connection
 session_start();
 // Check if the user is already logged in
 if (isset($_SESSION['email'])) {
-    header("location: ");
+    header("location: customer/viewfooditem.php");
     exit;
 }
 
@@ -47,7 +47,7 @@ if (isset($_POST['login'])) {
                     Swal.fire({
                         icon: "Wait",
                         title: "Please Wait!",
-                        text: "Wait for admin approval. You cannot log in at the moment.",
+                        text: "You have not been approved as a delivery person yet. Wait for admin approval. You cannot login at the moment.",
                         showCloseButton: true,
                     });
                 });

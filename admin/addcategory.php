@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../database/connection.php'); // Database Connection
+include('../admin/layout/header.php'); // Database Connection
 
 if (!isset($_SESSION['adminname'])) {
     header("Location: adminlogin.php");
@@ -48,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Category</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/adminpanel.css">
     <style>
         .form-container {
             max-width: 500px;

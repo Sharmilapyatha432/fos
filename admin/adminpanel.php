@@ -1,6 +1,8 @@
+
+
 <?php
 include('../admin/layout/header.php');
-include('../admin/layout/sidebar_menu.php');
+// include('../admin/layout/sidebar_menu.php');
 // include('../admin/layout/footer.php');
 include('../database/connection.php');
 
@@ -41,6 +43,7 @@ if (!$orders) {
 
 
 <link rel="stylesheet" href="../css/admin_table.css">
+<!-- <link rel="stylesheet" href="../css/adminpanel.css"> -->
 <div class="main-content">
     <h2 align="center">Orders List</h2>
     <table class="table">

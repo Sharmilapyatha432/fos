@@ -6,6 +6,7 @@
         <li><a href="fooditems.php">Food Items</a></li>
         <li><a href="adminpanel.php">Orders List</a></li>
         <li><a href="#">Customer List</a></li>
+        <li><a href="deliveryperson_list.php">Delivery Preson List</a></li>
     
     </ul>
 </div>

@@ -8,7 +8,7 @@ if (!isset($_SESSION['adminname'])) {
 }
 $adminname = $_SESSION['adminname'];
 
-include('../admin/layout/sidebar_menu.php');
+// include('../admin/layout/sidebar_menu.php');
 ?>
 
 <?php
@@ -39,7 +39,7 @@ $result = $conn->query($sql);
 <link rel="stylesheet" href="../css/table.css"> <!--CSS link for table-->
 <div class="con">
     <?php if (!isset($_POST['add'])) { ?>
-        <h1 align="center">List of Food Items</h1>
+        <h1 align="center" style="padding:10px">Food Item List</h1>
         <div class="table-wrapper">
             <form action="add_fooditem.php" method="post">
                 <input type="submit" value="Add Food" name="add">

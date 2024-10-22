@@ -88,7 +88,8 @@ if (isset($_POST['signup'])) {
                         Swal.fire({
                             icon: "success",
                             title: "Registration Successful",
-                            text: "Registration Successful",
+                            text: "Your registration as a delivery person is successful.
+                                    Wait for admin approval to login into your dashborad. You cannot login at a movement!!!",
                             showCloseButton: true,
                         }).then(function() {
                             window.location.href = "login.php?success=1";
