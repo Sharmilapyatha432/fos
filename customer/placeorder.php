@@ -8,7 +8,7 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
-$customer_id = $_SESSION['cid'];
+// $customer_id = $_SESSION['cid'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['food_id'], $_POST['quantity'])) {
@@ -44,12 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt_order_item = $conn->prepare($sql_order_item);
                 $stmt_order_item->bind_param("iiid", $order_id, $food_id, $quantity, $food['price']);
                 $stmt_order_item->execute();
-
-                // Update product stock
-                // $sql_update_stock = "UPDATE products SET stock = stock - ? WHERE product_id = ?";
-                // $stmt_update_stock = $conn->prepare($sql_update_stock);
-                // $stmt_update_stock->bind_param("ii", $quantity, $product_id);
-                // $stmt_update_stock->execute();
 
                 // Commit the transaction
                 $conn->commit();

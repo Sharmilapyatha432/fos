@@ -14,12 +14,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #1f1f1f;
+  background-color: #0adddde1;
   color: white;
 }
 
 .logo img {
-  width: 40px;
+  width: 50px;
   height: auto;
 }
 
@@ -48,10 +48,12 @@ body {
 .nav-links a i {
   font-size: 1.2em;
   margin-bottom: 5px;
+  color: #333;
 }
 
 .nav-links a span {
   font-size: 0.85em;
+  color: #333;
 }
 
 

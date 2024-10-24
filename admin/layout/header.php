@@ -6,21 +6,25 @@
     <title>Admin Panel Navigation</title>
     <link rel="stylesheet" href="../css/adminpanel.css">
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+
+    
+
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="../img/Bitebliss.png" alt="Logo" />
+            <img src="../img/Biteblisss.png" alt="Logo" />
         </div>
         <ul class="nav-links">
             <li><a href="adminpanel.php"><i class="fas fa-home"></i><span>Home</span></a></li>
             <li><a href="categories.php"><i class="fas fa-tachometer-alt"></i><span>Categories</span></a></li>
             <li><a href="fooditems.php"><i class="fas fa-box"></i><span>FoodItems</span></a></li>
             <li><a href="adminpanel.php"><i class="fas fa-th"></i><span>Orders</span></a></li>
-            <li><a href="customer_list.php"><i class="fas fa-user"></i><span>Customers</span></a></li>
-            <li><a href="deliveryperson_list.php"><i class="fas fa-user"></i><span>Delivery</span></a></li>
+            <li><a href="customer_list.php"><i class="fa-solid fa-user-group"></i><span>Customers</span></a></li>
+            <li><a href="deliveryperson_list.php"><i class="fa-solid fa-person-biking"></i><span>Delivery</span></a></li>
+            <li><a href="adminlogout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></a></li>
         </ul>
     </nav>
 </body>

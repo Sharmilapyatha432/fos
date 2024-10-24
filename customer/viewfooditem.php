@@ -37,7 +37,7 @@ $result = $conn->query($sql);
                         <p class="card-text"><?php echo htmlspecialchars($row['description']); ?></p>
                         <p class="card-text"><strong>Price: NRs.<?php echo htmlspecialchars($row['price']); ?></strong></p>
 
-                        <form method="post" action="placeorder.php">
+                        <form method="post" action="checkout.php">
                             <input type="hidden" name="food_id" value="<?php echo $row['food_id']; ?>">
                             <div class="mb-3">
                                 <label for="quantity" class="form-label">Quantity:</label>

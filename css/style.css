@@ -1,57 +1,265 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+*{
+    margin: 0px;
+    padding: 0px;
 }
 
-.header {
+body{
+    /* background-color: aquamarine; */
     display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+/* CSS for header section */
+
+.nav-links {
+    display: flex;
+    /* justify-content: space-between; */
+    list-style-type: none;
+  }
+
+  .nav-links li {
+    margin: 0 10px;
+  }
+
+  .nav-links a {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    background-color: #2C3E50;
+    text-decoration: none;
+    color: #c4c4c4;
+    font-size: 0.9em;
+  }
+
+  .nav-link.active a:hover {
     color: white;
-    padding: 10px 20px;
-}
+  }
 
-.container {
+  .nav-links a i {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: black;
+  }
+
+  .nav-links a span {
+    font-size: 0.85em;
+    color: black;
+  }
+
+  .nav {
+  background-color: #f8f9fa; /* Light background */
+  padding: 15px; /* Add some padding */
+  width: 250px; /* Set a width for the sidebar */
+  height: 100vh; /* Full height */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+
+  .nav-item {
+      margin-bottom: 10px; /* Space between items */
+  }
+
+  .nav-link {
+      display: block; /* Make the link fill the item */
+      padding: 10px 15px; /* Add padding */
+      color: #333; /* Text color */
+      text-decoration: none; /* Remove underline */
+      border-radius: 5px; /* Rounded corners */
+      transition: background-color 0.3s; /* Smooth background change */
+  }
+
+  .nav-link:hover {
+      background-color: #e2e6ea; /* Change background on hover */
+  }
+
+
+/* CSS for main section */
+
+.content {
     display: flex;
+    background-color: #C4F4E7;
+    /* width: 80%; */
 }
 
-.sidebar {
-    width: 250px;
-    background-color: #ECF0F1;
-    padding: 15px;
+/* CSS for sidebar */
+/* strong  a {
+  color: #333;
+} */
+
+.sidebar .nav.flex-column {
+  list-style-type: none;
+  padding: 10px;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
-.sidebar ul {
+/* #left .ol_ol li {
+  margin-bottom: 10px;
+  padding: 20px;
+  text-align: center;
+} */
+
+.sidebar .nav.flex-column li {
+  padding: 15px;
+  border-bottom: 1px solid #bdb8d7;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  list-style: none;
+}
+
+.sidebar .nav.flex-column li a {
+  color: #333;
+  display: block;
+}
+
+/* CSS for dropdown */
+
+.dropdown{
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown > button{
+  /* width: 170px; */
+  /* height: 60px; */
+  border: 0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 17px;
+  background: #f1f1f1;
+}
+
+.dropdown > .content{
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  /* padding: 0 16px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-decoration: underline;
+  /* color: #f7f7f7; */
+}
+
+.dropdown > .content > p{
+  padding-bottom: 20%;
+}
+
+.dropdown > .content:hover > p{
+  color: #fff;
+}
+
+.dropdown > .content::after{
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  right: 10%;
+  width: 80%;
+  height: 1px;
+  transform: scaleX(0);
+  background: rgba(255 255 255 /30%);
+  transition: 0.3s;
+}
+
+.dropdown:hover
+.content::after{
+  transform: scaleX(1);
+}
+
+.dropdown > .content > span:last-child{
+  margin-left: auto;
+  transition: 0.3s;
+}
+
+.dropdown:hover > .content > span:last-child{
+  rotate: -180deg;
+}
+
+.dropdown > .menu{
+  position: absolute;
+  z-index: 1;
+  top: -6px;
+  left: 50%;
+  display: grid;
+  width: 110%;
+  padding: 70px 0 6px;
+  border-radius: 6px;
+  translate: -50% 0;
+  visibility: hidden;
+  opacity: 0;
+  scale: 0.85;
+  /* background: linear-gradient(#ea8d8d, #a890fe); */
+  background: #00636E;
+  transition: 0.3s;
+}
+
+.dropdown:hover > .menu{
+  visibility: visible;
+  opacity: 1;
+  scale: 1;
+}
+
+.dropdown > .menu > a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f7f7f7;
+  font-size: 14px;
+  padding: 0 24px;
+}
+
+.dropdown > .menu > a > p{
+  color: #333;
+  font-size: 16px;
+  text-decoration: underline;
+  padding: 10px;
+}
+
+.dropdown > .menu >a:hover{
+  /* background: rgba(0 0 0 / 10%); */
+    background-color: #C4F4E7;
+}
+
+/* CSS for footer section */
+#footer {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.quick-links ul {
     list-style-type: none;
     padding: 0;
 }
 
-.sidebar li {
-    padding: 10px 0;
+.quick-links li {
+    margin-bottom: 10px;
 }
 
-.main-content {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #FFFFFF;
+.quick-links li a {
+    text-decoration: none;
+    color: #333;
 }
 
-.order-summary, .upcoming-deliveries, .map, .notifications, .earnings {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #BDC3C7;
-    border-radius: 5px;
+.quick-links li a:hover {
+    text-decoration: underline;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.social-icons a {
+    margin-right: 10px;
 }
 
-table th, table td {
-    border: 1px solid #BDC3C7;
-    padding: 8px;
-    text-align: left;
+.social-icons img {
+    width: 20px;
+    height: 20px;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
 }

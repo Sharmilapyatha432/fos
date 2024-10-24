@@ -34,7 +34,7 @@ $email = $_SESSION['email']; // Fetch logged-in user email
 <body>
 
      <!-- Display Welcome Message -->
-     <h2>Welcome, <?= htmlspecialchars($email); ?></h2>
+     <h2 align="center" style="padding:15px">Welcome, <?= htmlspecialchars($email); ?></h2>
 
     
     

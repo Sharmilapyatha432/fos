@@ -24,7 +24,7 @@ if (!isset($_SESSION['adminname'])) {
 // include('../database/connection.php');
 
 // Fetch orders
-$order_query = "SELECT o.order_id, o.customer_id AS cid, o.total_amount, o.delivery_status, o.order_date, 
+$order_query = "SELECT o.order_id, o.cid AS customer_id, o.total_amount, o.delivery_status, o.order_date, 
                 od.order_details_id, od.food_id, f.name AS food_name, od.quantity, od.price
                 FROM orders o 
                 JOIN orderdetails od ON o.order_id = od.order_id
@@ -64,15 +64,16 @@ if (!$orders) {
         <tbody>
         <?php while ($order = mysqli_fetch_assoc($orders)) { ?>
             <tr>
-                <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                <td><?php echo htmlspecialchars($order['order_details_id']); ?></td>
-                <td><?php echo htmlspecialchars($order['order_date']); ?></td>
-                <td><?php echo htmlspecialchars($order['cid']); ?></td>
-                <td><?php echo htmlspecialchars($order['food_id']); ?></td>
-                <td><?php echo htmlspecialchars($order['food_name']); ?></td>
-                <td><?php echo htmlspecialchars($order['quantity']); ?></td>
-                <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
-                <td><?php echo htmlspecialchars($order['delivery_status']); ?></td>
+            <td><?php echo htmlspecialchars($order['order_id'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+            <td><?php echo htmlspecialchars($order['order_details_id'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+            <td><?php echo htmlspecialchars($order['order_date'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+            <td><?php echo htmlspecialchars($order['cid'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+            <td><?php echo htmlspecialchars($order['food_id'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+            <td><?php echo htmlspecialchars($order['food_name'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+            <td><?php echo htmlspecialchars($order['quantity'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+            <td><?php echo htmlspecialchars($order['total_amount'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+            <td><?php echo htmlspecialchars($order['delivery_status'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td> 
+
                 <td> 
                     <form action="update_order_status.php" method="POST">
                         <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
@@ -84,7 +85,7 @@ if (!$orders) {
                     </form>
 
                     <?php //if ($order['status'] != 'canceled' && $order['status'] != 'delivered'): ?>
-                        <?php if ($order['status'] == 'pending'): ?>
+                        <?php if ($order['delivery_status'] == 'pending'): ?>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelOrderModal" data-order-id="<?php echo htmlspecialchars($order['order_id']); ?>">
                             Cancel Order
                         </button>
@@ -93,47 +94,9 @@ if (!$orders) {
                         <?php echo ($order['delivery_status'] == 'canceled') ? 'Canceled' : 'Cannot be Cancel'; ?>
                         </button>
                     <?php endif; ?>
-                    
                 </td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
 </div>
-
-
-<!-- Cancel Order Modal -->
-<!-- <div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cancelOrderModalLabel">Enter Order ID</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="cancel_order.php" method="post">
-                    <div class="form-group">
-                        <label for="order_id">Order ID:</label>
-                        <input type="number" class="form-control" id="order_id" name="order_id" required>
-                    </div>
-                    <button type="submit" class="btn btn-danger">Cancel Order</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-    $('#cancelOrderModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var orderId = button.data('order-id'); // Extract info from data-* attributes
-        var modal = $(this);
-        modal.find('#order_id').val(orderId); // Set the order ID in the modal input
-    });
-</script> -->
