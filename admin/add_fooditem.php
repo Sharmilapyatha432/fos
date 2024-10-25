@@ -108,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php
             $category_query = "SELECT * FROM foodcategory";
             $categories = mysqli_query($conn, $category_query);
+            echo "<option value='choose' disabled selected>Select Category</option>";
             while ($category = mysqli_fetch_assoc($categories)) {
                 echo "<option value='{$category['category_id']}'>{$category['category_name']}</option>";
             }

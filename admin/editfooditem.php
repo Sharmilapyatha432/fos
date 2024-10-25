@@ -1,0 +1,108 @@
+<?php
+include('../admin/layout/header.php');
+
+// Check if the user is logged in; redirect to login page if not logged in
+session_start();
+if (!isset($_SESSION['adminname'])) {
+    header("location:adminlogin.php");
+}
+$adminname = $_SESSION['adminname'];
+
+// Database connection
+include("../database/connection.php");
+
+// Initialize variables for editing
+$name = $description = $price = $category_id = $food_id = $image = "";
+
+// Editing food item
+if (isset($_POST['edit_food'])) {
+    $food_id = $_POST['food_id'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $category = $_POST['category_id'];
+
+    // Handle image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $image = $_FILES['image']['name'];
+        $target = "../uploads/" . basename($image);
+        move_uploaded_file($_FILES['image']['tmp_name'], $target);
+    } else {
+        // If no new image is uploaded, retain the old image
+        $image = ''; // You might want to fetch the current image from the database if needed
+    }
+
+    // Prepare SQL statement
+    $sql = "UPDATE fooditem SET name='$name', description='$description', price='$price', category_id='$category'";
+
+    // Only update the image if it's new
+    if ($image) {
+        $sql .= ", image='$image'";
+    }
+
+    $sql .= " WHERE food_id='$food_id'";
+    
+    $result = $conn->query($sql);
+    if ($result) {
+        header("Location: fooditems.php");
+        exit;
+    } else {
+        die("Error: " . $conn->error);
+    }
+}
+
+// View food details for editing
+if (isset($_POST['edit'])) {
+    $food_id = $_POST['food_id'];
+    $sql = "SELECT * FROM fooditem WHERE food_id='$food_id'";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $name = $row['name'];
+        $description = $row['description'];
+        $price = $row['price'];
+        $category_id = $row['category_id'];
+        $food_id = $row['food_id'];
+        $image = $row['image'];
+    } else {
+        die("No food item found with the given ID.");
+    }
+}
+
+?>
+   
+        
+        <!-- Food Edit Form -->
+        <link rel="stylesheet" href="../css/form.css">
+        <form method="post" action="" enctype="multipart/form-data">
+            <div class="container">
+                <label for="productname">Food Name</label>
+                <input type="text" name="name" placeholder="Enter Food Name" required value="<?php echo htmlspecialchars($name); ?>">
+
+                <label for="productdescription">Food Description</label>
+                <textarea name="description" placeholder="Enter Food Description"><?php echo htmlspecialchars($description); ?></textarea>
+
+                <label for="price">Price</label>
+                <input type="number" name="price" placeholder="Price" required value="<?php echo htmlspecialchars($price); ?>">
+
+                <label for="category">Category</label>
+                <select name="category_id" required>
+                    <option value='choose' disabled>Select Category</option>
+                    <?php
+                    $category_query = "SELECT * FROM foodcategory";
+                    $categories = mysqli_query($conn, $category_query);
+                    while ($category = mysqli_fetch_assoc($categories)) {
+                        $selected = ($category['category_id'] == $category_id) ? 'selected' : '';
+                        echo "<option value='{$category['category_id']}' $selected>{$category['category_name']}</option>";
+                    }
+                    ?>
+                </select>
+
+                <label for="image_url">Food Image</label>
+                <input type="file" name="image" value="<?php //echo htmlspecialchars($image); ?>" accept="image/*">
+                
+                <input type="hidden" name="food_id" value="<?php echo htmlspecialchars($food_id); ?>" />
+                <button type="submit" name="edit_food">Update Product</button>
+                <button type="button" onclick="window.location.href='fooditems.php'">Back</button>
+            </div>
+        </form>
