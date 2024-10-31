@@ -89,17 +89,17 @@ include('../admin/layout/header.php');
 <link rel="stylesheet" href="../css/admin_table.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<div class="container">
+<div class="main-content">
     <h2 class="text-center" style="padding:10px">Customer List</h2>
 
     <?php
-    // if (isset($_SESSION['message'])) {
-    //     echo "<div class='alert alert-success'>" . $_SESSION['message'] . "</div>";
-    //     unset($_SESSION['message']);
-    // }
+    if (isset($_SESSION['message'])) {
+        echo "<div class='alert alert-success'>" . $_SESSION['message'] . "</div>";
+        unset($_SESSION['message']);
+    }
     ?>
 
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr>
                 <th>CID</th>
@@ -122,13 +122,13 @@ include('../admin/layout/header.php');
                     <td>
                         <!-- Removing Customer -->
                         <form method="post" action=" " style="display:inline;">
-                                        <input type="hidden" value="<?php echo $row['cid']; ?>" name="cid" />
-                                        <input type="submit" class="btn-danger" value="Remove" name="delete"
-                                        onclick="return confirm('Are you sure you want to delete this category?');"
-                                        style="background-color: red; color: white; border: none; cursor: pointer;" 
-                                        onmouseover="this.style.backgroundColor='darkred';" 
-                                        onmouseout="this.style.backgroundColor='red';" />
-                                    </form>
+                                <input type="hidden" value="<?php echo $row['cid']; ?>" name="cid" />
+                                <input type="submit" class="btn-danger" value="Remove" name="delete"
+                                onclick="return confirm('Are you sure you want to delete this category?');"
+                                style="background-color: red; color: white; border: none; cursor: pointer;" 
+                                onmouseover="this.style.backgroundColor='darkred';" 
+                                onmouseout="this.style.backgroundColor='red';" />
+                        </form>
                     </td>
 
                 </tr>

@@ -49,14 +49,14 @@ if (!$category_result) {
 ?>
 
 <link rel="stylesheet" href="../css/admin_table.css">
-<link rel="stylesheet" href="../css/adminpanel.css">
+<!-- <link rel="stylesheet" href="../css/adminpanel.css"> -->
 <div class="main-content">
     <h1 align="center">List of Categories</h1>
     <div class="table-wrapper">
         <form action="addcategory.php" method="post">
             <input type="submit" value="Add category" name="add">
         </form>
-        <table class="fl-table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Category ID</th>

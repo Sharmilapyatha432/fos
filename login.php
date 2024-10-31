@@ -81,6 +81,8 @@ if (isset($_POST['login'])) {
 <!--------- HTML --------->
 
 <link rel="stylesheet" href="css/login.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+
 
 <div class="log">
     <div class="container">
@@ -92,12 +94,14 @@ if (isset($_POST['login'])) {
         <?php } ?>
         <form method="post" action="login.php" autocomplete="off">
             <div class="group-login">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <!-- <label for="email">Email:</label> -->
+                <i class="fa-solid fa-user"></i>
+                <input type="email" id="email" name="email" placeholder="Enter your email here..." required>
             </div>
             <div class="group-login">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password "required>
+                <!-- <label for="password">Password:</label> -->
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="password" name="password" placeholder="Enter your password here... "required>
             </div>
             <div class="user-selects">
                 <div class="customer-part">  
@@ -114,7 +118,9 @@ if (isset($_POST['login'])) {
             <div class="button-group">
                 <button type="submit" name="login" value="login">LOGIN</button>
             </div>
-            <span>Don't have an account? <a href="registration.php">Register Here!!!</a></span>
+            <span>Register as customer? <a href="registration.php">Click Here!!!</a></span>
+            <br> <br>
+            <span>Register as delivery person? <a href="delivery_person_reg.php">Click Here!!!</a>
         </form>
     </div>
 </div>

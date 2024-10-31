@@ -87,7 +87,7 @@ include('../admin/layout/header.php');
 <body>
 <link rel="stylesheet" href="../css/admin_table.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<div class="container">
+<div class="main-content">
     <h2 class="text-center" style="padding:10px">Delivery Person List</h2>
     <?php
     if (isset($_SESSION['message'])) {
@@ -95,7 +95,7 @@ include('../admin/layout/header.php');
         unset($_SESSION['message']);
     }
     ?>
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr>
                 <th>DP ID</th>

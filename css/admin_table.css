@@ -94,6 +94,58 @@ h2 {
     background-color: #5a6268;
 }
 
+/* Add Food Button */
+input[name="add"] {
+    background-color: #4CAF50; /* Green color for Add button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Add Food button hover effect */
+input[name="add"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Button alignment */
+input[type="submit"] {
+    margin: 10px 0;
+}
+
+input[name="edit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input[name="edit"]:hover {
+    background-color: #45a049; 
+}
+
+input[name="delete"] {
+    background-color: red; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input[name="delete"]:hover {
+    background-color: #c62107;
+}
+
 @media screen and (max-width: 768px) {
     .table, .thead, .tbody, .th, .td, .tr {
         display: block;

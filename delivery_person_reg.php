@@ -127,39 +127,47 @@ if (isset($_POST['signup'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Delivery Person Registration</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/dp_reg.css">
 </head>
 <body>
     <!-- Form Layout -->
     <div class="container">
-        <h3>Registration as Delivery Person</h3>
+        <h3>Register as Delivery Person</h3>
         <form class="row g-3" action="delivery_person_reg.php" method="post">
             <div class="col-md-6">
-                <label for="fullname" class="form-label">Full Name:</label>
-                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                <!-- <label for="fullname" class="form-label">Full Name:</label> -->
+                <i class="fa-solid fa-circle-user"></i>
+                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your full name here..." required>
             </div>
             <div class="col-md-6">
-                <label for="address" class="form-label">Address:</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required>
+                <!-- <label for="address" class="form-label">Address:</label> -->
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address here..." required>
             </div>
             <div class="col-md-6">
-                <label for="mobile" class="form-label">Mobile no:</label>
-                <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+                <!-- <label for="mobile" class="form-label">Mobile no:</label> -->
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Enter your mobile number here..." required>
             </div>
             <div class="col-md-6">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                <!-- <label for="email" class="form-label">Email:</label> -->
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email here..." required>
             </div>
             <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="inputPassword4" name="password" placeholder="Enter your password" required>
+                <!-- <label for="inputPassword4" class="form-label">Password:</label> -->
+                <i class="fa-solid fa-key"></i>
+                <input type="password" class="form-control" id="inputPassword4" name="password" placeholder="Enter your password here..." required>
             </div>
             <div class="col-md-6">
-                <label for="licenceno" class="form-label">License Number:</label>
-                <input type="text" class="form-control" id="licenceno" name="licenceno" placeholder="Enter your license number" required>
+                <!-- <label for="licenceno" class="form-label">License Number:</label> -->
+                <i class="fa-solid fa-id-card"></i>
+                <input type="text" class="form-control" id="licenceno" name="licenceno" placeholder="Enter your license number here..." required>
             </div>
             <div class="col-md-6">
-                <label for="inputState" class="form-label">Vehicles:</label>
+                <!-- <label for="inputState" class="form-label">Vehicles:</label> -->
+                <i class="fa-solid fa-car"></i>
                 <select id="inputState" class="form-select" name="vehicle" required>
                     <option selected disabled>Choose Vehicle</option>
                     <option value="Motorcycle">Motorcycle</option>
@@ -167,12 +175,14 @@ if (isset($_POST['signup'])) {
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="vehicleno" class="form-label">Vehicle no:</label>
-                <input type="text" class="form-control" id="vehicleno" name="vehicleno" placeholder="Enter your vehicle number" required>
+                <!-- <label for="vehicleno" class="form-label">Vehicle no:</label> -->
+                <i class="fa-solid fa-credit-card"></i>
+                <input type="text" class="form-control" id="vehicleno" name="vehicleno" placeholder="Enter your vehicle number here..." required>
             </div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-success" name="signup">SIGNUP</button>
             </div>
+            <span>Have an account? <a href="login.php">Click here!!!</a></span>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

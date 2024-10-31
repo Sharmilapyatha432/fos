@@ -29,15 +29,15 @@ $sql = "SELECT f.*, fc.category_name FROM fooditem f
 $result = $conn->query($sql);
 ?>
 
-<link rel="stylesheet" href="../css/table.css"> <!--CSS link for table-->
-<div class="con">
-    <h1 align="center" style="padding:10px">Food Item List</h1>
+<link rel="stylesheet" href="../css/admin_table.css"> <!--CSS link for table-->
+<div class="main_content">
+    <h2 align="center" style="padding:10px">Food Item List</h2>
     <div class="table-wrapper">
         <form action="add_fooditem.php" method="post">
             <input type="submit" value="Add Food" name="add">
         </form>
-        <table class="fl-table">
-            <tbody>
+        <table class="table">
+            <thead>
                 <tr>
                     <th>SN</th>
                     <th>Food ID</th>
@@ -47,6 +47,8 @@ $result = $conn->query($sql);
                     <th>Food Price</th>
                     <th>Action</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php if ($result && $result->num_rows > 0) {
                     $i = 1;
                     while ($row = $result->fetch_assoc()) { ?>

@@ -113,30 +113,36 @@ if (isset($_POST['signup'])) {
 ?>
 <!-- Include CSS for SweetAlert2 if needed -->
 <link rel="stylesheet" href="css/sweetAlert.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
 <div class="logg">
     <div class="container">
-        <h1>Registration Form</h1>
+        <h1>Register as Customer</h1>
         <form method="post" action="registration.php" autocomplete="off">
             <link rel="stylesheet" href="css/login.css">
             <div class="group-loginn">
-                <label for="name" class="labell">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <!-- <label for="name" class="labell">Name:</label> -->
+                <i class="fa-solid fa-circle-user"></i>
+                <input type="text" id="name" name="name" placeholder="Enter your name here..." required>
             </div>
             <div class="group-loginn">
-                <label for="address" class="labell">Address:</label>
-                <input type="text" id="address" name="address" placeholder="Enter your address" required>
+                <!-- <label for="address" class="labell">Address:</label> -->
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" id="address" name="address" placeholder="Enter your address here..." required>
             </div>
             <div class="group-loginn">
-                <label for="mobile" class="labell">Mobile:</label>
-                <input type="tel" id="mobile" name="mobile" placeholder="Enter your number" required>
+                <!-- <label for="mobile" class="labell">Mobile:</label> -->
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <input type="tel" id="mobile" name="mobile" placeholder="Enter your number here..." required>
             </div>
             <div class="group-loginn">
-                <label for="email" class="labell">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <!-- <label for="email" class="labell">Email:</label> -->
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="Enter your email here..." required>
             </div>
             <div class="group-loginn">
-                <label for="password" class="labell">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <!-- <label for="password" class="labell">Password:</label> -->
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="password" name="password" placeholder="Enter your password here..." required>
             </div>
             <!-- <div class="user-selects">
                 <div class="customer-part">
