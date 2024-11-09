@@ -12,6 +12,28 @@ body{
 
 /* CSS for header section */
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0;
+  padding-left: 130px;
+}
+
+
 .nav-links {
     display: flex;
     /* justify-content: space-between; */
@@ -71,16 +93,31 @@ body{
       background-color: #e2e6ea; /* Change background on hover */
   }
 
+/* Header Section ends here */
 
 /* CSS for main section */
 
 .content {
     display: flex;
-    background-color: #C4F4E7;
+    /* background-color: #C4F4E7; */
     /* width: 80%; */
-}
+  }
+
+/* Main section ends here */
 
 /* CSS for sidebar */
+
+/* .sidebar{ */
+  /* background-color: #39A6B0; */
+  /* width: 20%;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; */
+  /* position: fixed; */
+/* } */
+
 /* strong  a {
   color: #333;
 } */
@@ -110,6 +147,10 @@ body{
   color: #333;
   display: block;
 }
+
+/* Sidebar CSS ends here */
+
+
 
 /* CSS for dropdown */
 
@@ -223,6 +264,8 @@ body{
     background-color: #C4F4E7;
 }
 
+/* Dropdown CSS ends here */
+
 /* CSS for footer section */
 #footer {
     background-color: #f0f0f0;
@@ -262,4 +305,122 @@ body{
     margin-top: 20px;
     font-size: 14px;
     color: #777;
+}
+/* Footer CSS ends here */
+
+/* Container and Title */
+.card-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Grid Styling */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card-main {
+  flex: 1 1 calc(33.33% - 20px); /* 3 cards per row on medium to large screens */
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+/* Card Styling */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  text-align: left;
+}
+
+/* Card Text Styling */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Form Styling */
+.form-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .card-main {
+      flex: 1 1 calc(50% - 20px); /* 2 cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .card-main {
+      flex: 1 1 100%; /* 1 card per row on extra small screens */
+  }
 }

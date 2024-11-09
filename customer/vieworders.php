@@ -15,6 +15,9 @@ if (!isset($_SESSION['email'])) {
 
 include('../database/connection.php'); // Database connection
 include('../customer/layout/layout.php');
+// include('../customer/layout/header.php');
+// include('../customer/layout/sidebar.php');
+
 
 // Get customer ID from the session
 $email = $_SESSION['email'];

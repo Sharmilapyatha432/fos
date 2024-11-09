@@ -75,7 +75,7 @@ if (!$orders) {
             <td><?php echo htmlspecialchars($order['delivery_status'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td> 
 
                 <td> 
-                    <form action="update_order_status.php" method="POST">
+                    <form action="order_status.php" method="POST">
                         <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
                         <select name="delivery_status" onchange="this.form.submit()" class="form-select" <?php if ($order['delivery_status'] == 'canceled' || $order['delivery_status'] == 'delivered') echo 'disabled'; ?>>
                             <option value="" disable selected>Order Status</option>

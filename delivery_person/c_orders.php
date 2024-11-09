@@ -17,7 +17,7 @@ $sql = "
     SELECT o.order_id, o.customer_id, o.order_date, o.total_amount, o.delivery_status 
     FROM Orders o
     JOIN DeliveryAssignment da ON o.order_id = da.order_id
-    WHERE da.dpid = ? AND o.delivery_status IN ('Pending', 'Shipped')
+    WHERE da.dpid = ? AND o.delivery_status IN ('Pending')
     ORDER BY o.order_date DESC";  // Orders will be shown with the latest first
 
 $stmt = $conn->prepare($sql);

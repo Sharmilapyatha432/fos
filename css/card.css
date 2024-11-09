@@ -1,0 +1,109 @@
+/* CSS for card */
+.main-detail{
+    margin: 1rem 0 1.5rem 0;
+    /* display: flex; */
+}
+
+.detail-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    width: 100%;
+    margin-top: 1rem;
+    gap: 2%;
+    border-radius: 8px;
+}
+
+.detail-card{
+    min-height: 280px;
+    height: 100%;
+    background-color: var(--whiteColor);
+    border-radius: 8px;
+    margin: 1% 0;
+    box-shadow: rgba(176, 176, 176, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+    /* padding: 1rem; */
+}
+
+.detail-img{
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.8);
+}
+
+.detail-desc{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 3%;
+    width: 100%;
+}
+
+.detail-sub{
+    font-size: 12px;
+    color: var(--darkGreyColor);
+    letter-spacing: 0.5;
+    margin: 1;
+}
+
+.price{
+    color: var(--primaryColor);
+}
+
+.detail-favorites{
+    font-size: 24px;
+}
+
+.detail-card:hover{
+    box-shadow: rgba(149, 157, 168, 0.2) 0px 8px 24px;
+}
+
+.detail-card:hover .detail-img{
+    filter: opacity(1);
+}
+
+.detail-card:hover .detail-name h4{
+    color: var(--primaryColor);
+}
+
+.detail-card:hover .price{
+    letter-spacing: 1.5;
+}
+
+/* Form Styling */
+.form-label {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: var(--primaryColor);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.w-100 {
+    width: 100%;
+}

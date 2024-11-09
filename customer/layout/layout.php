@@ -1,51 +1,53 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="dashboard.css">
+    <!-- Fix the font URL typo here -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@480;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layoutstyle.css">
+    <title>Dashboard</title>
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="d-flex">
-        <nav class="sidebar bg-dark p-3">
-            <h2 class="text-white">Customer Dashboard</h2>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-3">
-                    <a href="#" class="nav-link text-white"><i class="fa-solid fa-house"></i> Dashboard</a>
-                </li>
-                <li class="nav-item mb-3">
-                    <a href="viewfooditem.php" class="nav-link text-white"><i class="fa-solid fa-bowl-food"></i> Food Items</a>
-                </li>
-                <li class="nav-item mb-3">
-                    <a href="vieworders.php" class="nav-link text-white"><i class="fa-solid fa-box"></i> My Orders</a>
-                </li>
-                <li class="nav-item mb-3">
-                    <a href="#" class="nav-link text-white"><i class="fa-solid fa-user"></i> Profile</a>
-                </li>
-                <li class="nav-item">
-                <a href="../logout.php" class="nav-link text-white"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Main Content -->
-        <div class="main-content w-100 p-4">
-            <!-- Header -->
-            <header class="mb-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h1 class="text-primary">BiteBliss Customer Dashboard</h1>
-                </div>
-            </header>
-
-               <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="sidebar">
+        <!-- Logo -->
+        <h1 class="logo">BITEBLISS</h1>
+        <!-- List of menus -->
+        <div class="sidebar-menus">
+            <a href="viewfooditem.php"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+            <a href="viewfooditem.php"><ion-icon name="pizza-outline"></ion-icon>Food Items</a>
+            <a href="vieworders.php"><ion-icon name="cart-outline"></ion-icon>My Orders</a>
+        </div>
+        <!-- Logout -->
+        <div class="sidebar-logout">
+            <a href="../logout.php"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+        </div>
+    </div>
+    <!-- main -->
+    <div class="main">
+        <!-- main navbar -->
+        <div class="main-navbar">
+            <!-- menu when appear on mobile version -->
+            <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+            <!-- search bar -->
+            <div class="search">
+                <input type="text" name="searchs" id="searchs" placeholder="What you want to eat?">
+                <button class="search-btn">Search</button>
+            </div>
+            <!-- profile icon on left side of navbar -->
+            <div class="profile">
+                <!-- <a href="#" class="cart"><ion-icon name="cart-outline"></ion-icon></a> -->
+                <a href="profile.php" class="user"><ion-icon name="person-outline"></ion-icon></a>
+            </div>
+        </div>
+            <hr class="divider">    
+            </div>
+        </div>
+    </div>
 </body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg-com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- adding javascript -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="app.js"></script>
 </html>

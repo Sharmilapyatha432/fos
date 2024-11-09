@@ -9,6 +9,7 @@ if (!isset($_SESSION['email'])) {
 }
 
 // $customer_id = $_SESSION['cid'];
+$email = $_SESSION['email']; // Fetch logged-in user email
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['food_id'], $_POST['quantity'])) {
