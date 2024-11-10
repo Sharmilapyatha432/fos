@@ -135,6 +135,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
             <button type="submit" name="place_order">
                 <a href="placeorder.php">Place Order</a>
             </button>
+            <button type="submit" name="back">
+                <a href="viewfooditem.php">Go Back</a>
+            </button>
         </form>
     </div>
 </body>

@@ -25,11 +25,20 @@ if (isset($_POST['edit_food'])) {
     // Handle image upload
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $image = $_FILES['image']['name'];
-        $target = "../uploads/" . basename($image);
+        $target = "../img/" . basename($image);
         move_uploaded_file($_FILES['image']['tmp_name'], $target);
     } else {
+        // Fetch the existing image URL if no new image is uploaded
+        $stmt = $conn->prepare("SELECT image FROM fooditem WHERE food_id = ?");
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $image_result = $stmt->get_result();
+        if ($image_result->num_rows > 0) {
+            $image_row = $image_result->fetch_assoc();
+            $image = $image_row['image'];
+        }
         // If no new image is uploaded, retain the old image
-        $image = ''; // You might want to fetch the current image from the database if needed
+        //$image = ''; // You might want to fetch the current image from the database if needed
     }
 
     // Prepare SQL statement
@@ -100,7 +109,9 @@ if (isset($_POST['edit'])) {
 
                 <label for="image_url">Food Image</label>
                 <input type="file" name="image" value="<?php //echo htmlspecialchars($image); ?>" accept="image/*">
-                
+                <img src="../img/<?php echo htmlspecialchars($image); ?>" width="100px" alt="Food Image">
+
+
                 <input type="hidden" name="food_id" value="<?php echo htmlspecialchars($food_id); ?>" />
                 <button type="submit" name="edit_food">Update Product</button>
                 <button type="button" onclick="window.location.href='fooditems.php'">Back</button>

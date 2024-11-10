@@ -14,7 +14,7 @@
         <h1 class="logo">BITEBLISS</h1>
         <!-- List of menus -->
         <div class="sidebar-menus">
-            <a href="viewfooditem.php"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+            <a href="customer_panel.php"><ion-icon name="storefront-outline"></ion-icon>Home</a>
             <a href="viewfooditem.php"><ion-icon name="pizza-outline"></ion-icon>Food Items</a>
             <a href="vieworders.php"><ion-icon name="cart-outline"></ion-icon>My Orders</a>
         </div>
@@ -40,14 +40,5 @@
                 <a href="profile.php" class="user"><ion-icon name="person-outline"></ion-icon></a>
             </div>
         </div>
-            <hr class="divider">    
-            </div>
-        </div>
-    </div>
-</body>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg-com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<!-- adding javascript -->
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="app.js"></script>
-</html>
+            <hr class="divider">   
+           

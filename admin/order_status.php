@@ -10,17 +10,17 @@ if (!isset($_SESSION['adminname'])) {
 
 // Check if the request method is POST and the required fields are set
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['order_id'], $_POST['status'])) {
+    if (isset($_POST['order_id'], $_POST['delivery_status'])) {
         $order_id = intval($_POST['order_id']);
-        $status = $_POST['status'];
+        $delivery_status = $_POST['delivery_status'];
         
         // Check if the status is valid (optional validation)
         $valid_statuses = ['shipped', 'delivered']; 
         if (in_array($status, $valid_statuses)) {
             // Update the order status in the database
-            $update_query = "UPDATE orders SET status = ? WHERE order_id = ?";
+            $update_query = "UPDATE orders SET delivery_status = ? WHERE order_id = ?";
             $stmt = $conn->prepare($update_query);
-            $stmt->bind_param("si", $status, $order_id);
+            $stmt->bind_param("si", $delivery_status, $order_id);
 
             if ($stmt->execute()) {
                 $_SESSION['success_message'] = "Order status updated successfully.";

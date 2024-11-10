@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         // exit;
                     } else {
                         // Set error message
-                        $_SESSION['message'] = "Error inserting product: " . mysqli_error($conn);
+                        $_SESSION['message'] = "Error inserting food item: " . mysqli_error($conn);
                         $_SESSION['msg_type'] = "error";
                     }
                 } else {
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ?>
         </select>
 
-        <label for="image_url">Food Image</label>
+        <label for="image">Food Image</label>
         <input type="file" name="image" accept="image/*" required>
         
         <button type="submit">Add Product</button>

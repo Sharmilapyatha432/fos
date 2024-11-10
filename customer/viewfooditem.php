@@ -59,9 +59,19 @@ $result = $conn->query($sql);
             <?php } ?>
         </div> <!-- Close .detail-wrapper here -->
     </div> <!-- Close .main-detail here -->
- <!-- </div>  Close .container here -->
+<!-- </div>  Close .container here -->
 
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> -->
 
 <?php //include('customer/layout/cfooter.php'); ?>
+</div>
+        </div>
+    </div>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg-com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- adding javascript -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="../../js/app.js"></script>
+</html>
