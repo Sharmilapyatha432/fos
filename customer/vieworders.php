@@ -69,7 +69,7 @@ $result = $stmt->get_result();
                         <td><?php echo number_format($order['item_price'], 2); ?></td>
                         <td><?php echo htmlspecialchars($order['quantity']); ?></td>
                         <td><?php echo number_format($order['quantity'] * $order['item_price'], 2); ?></td>
-                        <td><img src="<?php echo htmlspecialchars($order['image']); ?>" alt="Food Image" width="100"></td>
+                        <td><img src="../img/<?php echo htmlspecialchars($order['image']); ?>" alt="Food Image" width="100"></td>
                         <td><?php echo htmlspecialchars($order['delivery_status']); ?></td>
                     </tr>
                 <?php }

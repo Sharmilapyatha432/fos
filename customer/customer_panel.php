@@ -41,7 +41,7 @@ $result = $conn->query($sql);
             <?php if ($result && $result->num_rows > 0) { 
                 while ($row = $result->fetch_assoc()) { ?>
                     <div class="detail-card">
-                        <img src="<?php echo !empty($row['image']) ? htmlspecialchars($row['image']) : 'path/to/default-image.jpg'; ?>" 
+                        <img src="../img/<?php echo !empty($row['image']) ? htmlspecialchars($row['image']) : 'path/to/default-image.jpg'; ?>" 
                             class="detail-img" 
                             alt="<?php echo htmlspecialchars($row['name']); ?>" />
                         <div class="detail-desc">

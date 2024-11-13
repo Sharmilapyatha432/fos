@@ -22,13 +22,13 @@
             <li><a href="categories.php"><i class="fas fa-tachometer-alt"></i><span>Categories</span></a></li>
             <li><a href="fooditems.php"><i class="fas fa-box"></i><span>FoodItems</span></a></li>
             <li><a href="adminpanel.php"><i class="fas fa-th"></i><span>Orders</span></a></li>
-            <li><a href="customer_list.php"><i class="fa-solid fa-user-group"></i><span>Customers</span></a></li>
+            <li><a href="customerlist.php"><i class="fa-solid fa-user-group"></i><span>Customers</span></a></li>
             <li><a href="deliveryperson_list.php"><i class="fa-solid fa-person-biking"></i><span>Delivery</span></a></li>
             <li><a href="adminlogout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></a></li>
         </ul>
     </nav>
 </body>
-</html>
+</html> 
 
 
 

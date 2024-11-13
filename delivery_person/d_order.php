@@ -2,26 +2,31 @@
 session_start();
 
 // Check if delivery person is logged in
-if (!isset($_SESSION['dpid'])) {
+if (!isset($_SESSION['email'])) {
     header("Location: login.php");
     exit;
 }
 
-include('database/connection.php');
+include('../database/connection.php');
+include('../delivery_person/layout/header.php');
+include('../delivery_person/layout/sidebar.php');
 
 // Get delivery person's ID from session
-$dpid = $_SESSION['dpid'];
+// $dpid = $_SESSION['dpid'];
+$dpid = $_SESSION['email'];
 
 // SQL query to fetch orders assigned to the logged-in delivery person where delivery_status is 'Pending' or 'Shipped'
-$sql = "
-    SELECT o.order_id, o.customer_id, o.order_date, o.total_amount, o.delivery_status 
-    FROM Orders o
-    JOIN DeliveryAssignment da ON o.order_id = da.order_id
-    WHERE da.dpid = ? AND o.delivery_status IN ('Shipped')
-    ORDER BY o.order_date DESC";  // Orders will be shown with the latest first
+// $sql = "
+//     SELECT o.order_id, o.customer_id, o.order_date, o.total_amount, o.delivery_status 
+//     FROM Orders o
+//     JOIN DeliveryAssignment da ON o.order_id = da.order_id
+//     WHERE da.dpid = ? AND o.delivery_status IN ('Shipped')
+//     ORDER BY o.order_date DESC";  // Orders will be shown with the latest first
+
+$sql = "SELECT order_id, cid, order_date, total_amount, shipping_address, payment_method, delivery_status FROM orders WHERE delivery_status = 'Delivered'";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $dpid);
+// $stmt->bind_param("i", $dpid);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -37,7 +42,7 @@ $result = $stmt->get_result();
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Your Current Orders</h1>
+        <h1 class="text-center">Delivered Orders</h1>
         
         <?php if ($result->num_rows > 0): ?>
             <table class="table table-bordered table-striped mt-4">
@@ -46,18 +51,18 @@ $result = $stmt->get_result();
                         <th>Order ID</th>
                         <th>Customer ID</th>
                         <th>Order Date</th>
-                        <th>Total Amount</th>
-                        <th>Delivery Status</th>
+                        <!-- <th>Total Amount</th> -->
+                        <th>Shipping Address</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($row['order_id']); ?></td>
-                            <td><?php echo htmlspecialchars($row['customer_id']); ?></td>
+                            <td><?php echo htmlspecialchars($row['cid']); ?></td>
                             <td><?php echo htmlspecialchars($row['order_date']); ?></td>
-                            <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
-                            <td><?php echo htmlspecialchars($row['delivery_status']); ?></td>
+                            <!-- <td><?php //echo htmlspecialchars($row['total_amount']); ?></td> -->
+                            <td><?php echo htmlspecialchars($row['shipping_address']); ?></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>

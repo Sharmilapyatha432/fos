@@ -8,6 +8,7 @@ if (!isset($_SESSION['adminname'])) {
     exit();
 }
 
+
 // Check if the request method is POST and the required fields are set
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['order_id'], $_POST['delivery_status'])) {
