@@ -124,7 +124,7 @@ include('../admin/layout/header.php');
                         <form method="post" action=" " style="display:inline;">
                                 <input type="hidden" value="<?php echo $row['cid']; ?>" name="cid" />
                                 <input type="submit" class="btn-danger" value="Remove" name="delete"
-                                onclick="return confirm('Are you sure you want to delete this category?');"
+                                onclick="return confirm('Are you sure you want to delete this customer?');"
                                 style="background-color: red; color: white; border: none; cursor: pointer;" 
                                 onmouseover="this.style.backgroundColor='darkred';" 
                                 onmouseout="this.style.backgroundColor='red';" />

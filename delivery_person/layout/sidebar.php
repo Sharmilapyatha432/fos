@@ -9,7 +9,7 @@
             <a class="nav-link" href="c_orders.php">Current Orders</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../d_order.php">Delivered Orders</a>
+            <a class="nav-link" href="d_order.php">Delivered Orders</a>
         </li>
     </ul>
 </div>

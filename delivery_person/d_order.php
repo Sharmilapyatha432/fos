@@ -8,8 +8,8 @@ if (!isset($_SESSION['email'])) {
 }
 
 include('../database/connection.php');
-include('../delivery_person/layout/header.php');
-include('../delivery_person/layout/sidebar.php');
+include('../delivery_person/layout/dheader.php');
+// include('../delivery_person/layout/sidebar.php');
 
 // Get delivery person's ID from session
 // $dpid = $_SESSION['dpid'];
@@ -23,8 +23,10 @@ $dpid = $_SESSION['email'];
 //     WHERE da.dpid = ? AND o.delivery_status IN ('Shipped')
 //     ORDER BY o.order_date DESC";  // Orders will be shown with the latest first
 
-$sql = "SELECT order_id, cid, order_date, total_amount, shipping_address, payment_method, delivery_status FROM orders WHERE delivery_status = 'Delivered'";
-
+$sql = "SELECT o.order_id, o.cid, o.order_date, o.total_amount, o.shipping_address, o.payment_method, o.delivery_status, c.name AS customer_name
+        FROM orders o
+        JOIN customer c ON o.cid = c.cid
+        WHERE o.delivery_status = 'Delivered'";
 $stmt = $conn->prepare($sql);
 // $stmt->bind_param("i", $dpid);
 $stmt->execute();
@@ -49,7 +51,7 @@ $result = $stmt->get_result();
                 <thead class="thead-dark">
                     <tr>
                         <th>Order ID</th>
-                        <th>Customer ID</th>
+                        <th>Customer Name</th>
                         <th>Order Date</th>
                         <!-- <th>Total Amount</th> -->
                         <th>Shipping Address</th>
@@ -59,7 +61,7 @@ $result = $stmt->get_result();
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($row['order_id']); ?></td>
-                            <td><?php echo htmlspecialchars($row['cid']); ?></td>
+                            <td><?php echo htmlspecialchars($row['customer_name']); ?></td>
                             <td><?php echo htmlspecialchars($row['order_date']); ?></td>
                             <!-- <td><?php //echo htmlspecialchars($row['total_amount']); ?></td> -->
                             <td><?php echo htmlspecialchars($row['shipping_address']); ?></td>

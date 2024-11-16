@@ -21,9 +21,9 @@ if (isset($_POST['login'])) {
     // Use prepared statements to prevent SQL injection
     $sql = "";
     if ($userselects == "customer") {
-        $sql = "SELECT * FROM customer WHERE email = ?";
+        $sql = "SELECT cid, email, name, password FROM customer WHERE email = ?";
     } elseif ($userselects == "delivery_person") {
-        $sql = "SELECT * FROM delivery_person WHERE email = ?";
+        $sql = "SELECT dpid, email, fullname, password FROM delivery_person WHERE email = ?";
     }
 
     // Prepares the SQL statement, binds the email parameter, executes the statement, and retrieves the result.
@@ -55,8 +55,11 @@ if (isset($_POST['login'])) {
             } else {
 
                 // Password matches, store user details in session
-                $_SESSION['id'] = $row['id'];
+                $_SESSION['cid'] = $row['cid'];
+                $_SESSION['dpid'] = $row['dpid'];
                 $_SESSION['email'] = $email;
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['fullname'] = $row['fullname'];
                 $_SESSION['usertype'] = $userselects;
 
                 if ($userselects == "customer") {

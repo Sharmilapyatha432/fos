@@ -8,6 +8,7 @@ if (!isset($_SESSION['email'])) {
 }
 
 include('../database/connection.php');
+include('../delivery_person/layout/dheader.php');
 
 // SQL query to fetch orders (Make sure the query is correct for your use case)
 $sql = "SELECT o.order_id, o.cid, o.order_date, o.total_amount, o.shipping_address, o.payment_method, o.delivery_status, c.name AS customer_name

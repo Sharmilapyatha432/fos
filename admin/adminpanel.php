@@ -22,24 +22,12 @@ include('../database/connection.php');
 //     JOIN fooditem f ON od.food_id = f.food_id
 //     ORDER BY o.order_id";
 
-$order_query = " SELECT 
-    o.order_id, 
-    o.cid, 
-    c.name AS customer_name,   -- Adding the customer's name from the 'customers' table
-    o.total_amount, 
-    o.delivery_status, 
-    o.order_date, 
-    od.order_details_id, 
-    od.food_id, 
-    f.name AS food_name, 
-    od.quantity, 
-    od.price 
-FROM orders o
-JOIN orderdetails od ON o.order_id = od.order_id
-JOIN fooditem f ON od.food_id = f.food_id
-JOIN customer c ON o.cid = c.cid  -- Joining the 'customers' table to get the customer's name
-ORDER BY o.order_id;
-";
+$order_query = " SELECT o.order_id, o.cid, c.name AS customer_name, o.total_amount, o.delivery_status,
+                o.order_date, od.order_details_id, od.food_id, f.name AS food_name, od.quantity, od.price 
+                FROM orders o JOIN orderdetails od ON o.order_id = od.order_id
+                JOIN fooditem f ON od.food_id = f.food_id
+                JOIN customer c ON o.cid = c.cid
+                ORDER BY o.order_id;";
 
 
 

@@ -14,4 +14,10 @@ if ($row = $result->fetch_assoc()) {
 }
 
 $conn->close();
+
+
 ?>
+
+<form action="">
+    
+</form>

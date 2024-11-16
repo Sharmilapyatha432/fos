@@ -6,18 +6,20 @@ error_reporting(E_ALL);
 // $customer_id = $row['customer_id'];
 
 // Ensure the user is logged in
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['cid'])) {
     header('Location: login.php'); // Redirect to login page if the customer is not logged in
     exit();
 }
 
-$email = $_SESSION['email'];  // Get the customer ID (cid) from the session
+// $email = $_SESSION['email'];  // Get the customer ID (cid) from the session
+$customer_id = $_SESSION['cid']; // or get it from a login system
+
 
 include('../database/connection.php');  // Database connection
 include('../customer/layout/layout.php');  // Layout (header, sidebar, etc.)
 
 // SQL query to fetch the order details for the logged-in customer (based on cid)
-$order_query = "SELECT o.order_id, o.total_amount, o.delivery_status, 
+$order_query = "SELECT o.order_id, o.total_amount, o.delivery_status, o.estimated_delivery_time,
                 od.order_details_id, od.quantity, od.price AS item_price, f.food_id, 
                 f.name AS food_name, f.description AS food_description, f.image
                 FROM orders o 
@@ -54,6 +56,7 @@ $result = $stmt->get_result();
                 <th>Quantity</th>
                 <th>Total Amount</th>
                 <th>Food Image</th>
+                <th>Estimated Delivery Time</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -70,6 +73,7 @@ $result = $stmt->get_result();
                         <td><?php echo htmlspecialchars($order['quantity']); ?></td>
                         <td><?php echo number_format($order['quantity'] * $order['item_price'], 2); ?></td>
                         <td><img src="../img/<?php echo htmlspecialchars($order['image']); ?>" alt="Food Image" width="100"></td>
+                        <td><?php echo ($order['estimated_delivery_time']); ?></td>
                         <td><?php echo htmlspecialchars($order['delivery_status']); ?></td>
                     </tr>
                 <?php }

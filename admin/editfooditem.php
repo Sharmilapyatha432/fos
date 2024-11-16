@@ -30,7 +30,7 @@ if (isset($_POST['edit_food'])) {
     } else {
         // Fetch the existing image URL if no new image is uploaded
         $stmt = $conn->prepare("SELECT image FROM fooditem WHERE food_id = ?");
-        $stmt->bind_param("i", $product_id);
+        $stmt->bind_param("i", $food_id);
         $stmt->execute();
         $image_result = $stmt->get_result();
         if ($image_result->num_rows > 0) {
