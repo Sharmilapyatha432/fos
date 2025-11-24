@@ -47,7 +47,7 @@ $result = $conn->query($sql);
                             </p>
 
                              <!-- ADD TO CART FORM -->
-            <form method="post" action="add_to_cart.php">
+                            <form method="post" action="add_to_cart.php">
                 <input type="hidden" name="food_id" value="<?php echo (int)$row['food_id']; ?>">
                 <input type="hidden" name="name" value="<?php echo htmlspecialchars($row['name']); ?>">
                 <input type="hidden" name="price" value="<?php echo htmlspecialchars($row['price']); ?>">
@@ -86,7 +86,7 @@ $result = $conn->query($sql);
                             <!-- Button triggers the modal and passes data via data-* attributes -->
                             <button 
                                 type="button" 
-                                class="btn btn-warning w-100 open-checkout-modal"
+                                class="btn btn-primary w-100 open-checkout-modal"
                                 data-bs-toggle="modal" 
                                 data-bs-target="#checkoutModal"
                                 data-food-id="<?php echo $row['food_id']; ?>"

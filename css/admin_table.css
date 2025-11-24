@@ -1,57 +1,71 @@
 body {
-    /* font-family: 'Arial', sans-serif; */
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
     background-color: #f8f9fa;
     color: #333;
 }
 
 .main-content {
-    width: 90%;
+    width: 94%;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    box-shadow: 0 12px 32px rgba(15, 48, 64, 0.08);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 h2 {
-    color: #333;
+    color: #0f3040;
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 700;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
 }
 
 .table {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 16px;
+    margin: 0 auto 12px auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px rgba(15, 48, 64, 0.05);
+    border: 1px solid #d1d5db;
+    min-width: 720px;
 }
 
 .table thead {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #ffffff;
+    color: #000;
 }
 
 .table th, .table td {
-    padding: 15px;
+    padding: 14px 16px;
     text-align: left;
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #fff;
+    color: #000;
 }
 
 .table th {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
 }
 
-.table tr:nth-child(even) td {
-    background-color: #f2f2f2;
+.table tbody tr:nth-child(even) td {
+    background-color: #f6f7fb;
 }
 
 .table tbody tr:hover td {
-    background-color: #e9ecef;
-    transition: background-color 0.3s ease;
-
+    background-color: #e9f5ff;
+    transition: background-color 0.2s ease;
 }
 
 .table td {
@@ -59,25 +73,32 @@ h2 {
 }
 
 .table select.form-select {
-    padding: 5px;
+    padding: 7px 8px;
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
     width: 100%;
-    max-width: 150px;
+    max-width: 160px;
+    background-color: #fff;
 }
 
 .btn {
-    padding: 8px 16px;
+    padding: 8px 14px;
     font-size: 14px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    border: none;
+    transition: transform 0.1s ease, box-shadow 0.12s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
 }
 
 .btn-danger {
     background-color: #dc3545;
     color: #fff;
-    border: none;
 }
 
 .btn-danger:hover {
@@ -87,96 +108,81 @@ h2 {
 .btn-secondary {
     background-color: #6c757d;
     color: #fff;
-    border: none;
 }
 
 .btn-secondary:hover {
     background-color: #5a6268;
 }
 
-/* Add Food Button */
-input[name="add"] {
-    background-color: #4CAF50; /* Green color for Add button */
-    color: white;
-    padding: 10px 20px;
+.action-cell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.action-cell form {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+
+.action-cell select.form-select {
+    min-width: 140px;
+    max-width: 240px;
+}
+
+.action-col {
+    width: auto;
+    min-width: 180px;
+}
+
+/* Add/Edit/Delete buttons in forms */
+input[name="add"],
+input[name="edit"],
+input[name="delete"] {
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-align: center;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    font-size: 15px;
+    transition: transform 0.1s ease, box-shadow 0.12s ease, background-color 0.2s ease;
 }
 
-/* Add Food button hover effect */
-input[name="add"]:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-/* Button alignment */
-input[type="submit"] {
-    margin: 10px 0;
-}
-
+input[name="add"],
 input[name="edit"] {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
 }
 
+input[name="add"]:hover,
 input[name="edit"]:hover {
-    background-color: #45a049; 
+    background-color: #45a049;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
 }
 
 input[name="delete"] {
-    background-color: red; 
+    background-color: red;
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
 }
 
 input[name="delete"]:hover {
     background-color: #c62107;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+}
+
+input[type="submit"] {
+    margin: 10px 0;
 }
 
 @media screen and (max-width: 768px) {
-    .table, .thead, .tbody, .th, .td, .tr {
-        display: block;
-    }
-
-    .table thead {
-        display: none;
-    }
-
-    .table tr {
-        margin-bottom: 15px;
-        display: block;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 15px;
-    }
-
-    .table td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-    }
-
-    .table td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-
-    .table td:last-child {
-        justify-content: flex-start;
+    .table {
+        width: 100%;
+        min-width: 640px;
     }
 }
