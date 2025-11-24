@@ -10,6 +10,9 @@
                     <a href="viewfooditem.php" class="nav-link"><i class="fa-solid fa-bowl-food"></i> Food Items</a>
                 </li>
                 <li class="nav-item">
+                    <a href="cart.php" class="nav-link"><i class="fa-solid fa-cart-arrow-down"></i>></i> My Cart</a>
+                </li>
+                <li class="nav-item">
                     <a href="vieworders.php" class="nav-link"><i class="fa-solid fa-box"></i> My Orders</a>
                 </li>
             </ul>

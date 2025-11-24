@@ -44,12 +44,39 @@ $result = $conn->query($sql);
                             <h4><?php echo htmlspecialchars($row['name']); ?></h4>
                             <p class="detail-sub"><?php echo htmlspecialchars($row['description']); ?></p>
                             <p class="price"><strong>Price: NRs.<?php echo htmlspecialchars($row['price']); ?></strong></p>
+
+            <!-- ADD TO CART FORM -->
+            <form method="post" action="add_to_cart.php">
+                <input type="hidden" name="food_id" value="<?php echo (int)$row['food_id']; ?>">
+                <input type="hidden" name="name" value="<?php echo htmlspecialchars($row['name']); ?>">
+                <input type="hidden" name="price" value="<?php echo htmlspecialchars($row['price']); ?>">
+
+                <div class="mb-3">
+                    <label for="qty_<?php echo $row['food_id']; ?>" class="form-label">Quantity:</label>
+                    <input
+                        type="number"
+                        name="quantity"
+                        id="qty_<?php echo $row['food_id']; ?>"
+                        class="form-control"
+                        value="1"
+                        min="1"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-warning w-100">
+                    Add to Cart
+                </button>
+            </form>
+            <!-- /ADD TO CART FORM -->
+<br>
+
                             <!-- <form> -->
                                 <!-- <input type="hidden" name="food_id" value="<?php //echo $row['food_id']; ?>"> -->
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label for="quantity" class="form-label">Quantity:</label>
                                     <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" required>
-                                </div>
+                                </div> -->
                                 <button class="btn btn-warning w-100" 
                                         onclick="setProductDetails(<?php echo $row['food_id']; ?>, '<?php echo $row['name']; ?>', <?php echo $row['price']; ?>)">
                                     Place Order

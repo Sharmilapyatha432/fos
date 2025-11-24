@@ -19,7 +19,7 @@ include('../database/connection.php');  // Database connection
 include('../customer/layout/layout.php');  // Layout (header, sidebar, etc.)
 
 // SQL query to fetch the order details for the logged-in customer (based on cid)
-$order_query = "SELECT o.order_id, o.total_amount, o.delivery_status, o.estimated_delivery_time,
+$order_query = "SELECT o.order_id, o.total_amount, o.delivery_status,
                 od.order_details_id, od.quantity, od.price AS item_price, f.food_id, 
                 f.name AS food_name, f.description AS food_description, f.image
                 FROM orders o 
