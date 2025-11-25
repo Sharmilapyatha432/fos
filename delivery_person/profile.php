@@ -14,8 +14,7 @@ $email = $_SESSION['email']; // Fetch logged-in user email
 
 // Database Connection
 include('../database/connection.php');
-include('../customer/layout/header.php');
-// include('../customer/layout/sidebar.php');
+include('../delivery_person/layout/dheader.php');
 
 // Query to fetch delivery person details
 $sql = "SELECT * FROM delivery_person WHERE dpid = '" . $_SESSION['dpid'] . "'";
@@ -30,65 +29,86 @@ if ($result && $result->num_rows > 0) {
 ?>
 
 <link rel="stylesheet" href="../css/view_profile.css">
-<div class="box-container">
-    <div class="box">
-        <h1>My Profile</h1>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
 
+<div class="profile-page">
+    <div class="profile-card">
         <?php if ($row): ?>
-        <div class="form-group">
-            <i class="fa-solid fa-circle-user"></i>
-            <input type="text" id="fullname" name="fullname" value="<?php echo htmlspecialchars($row['fullname'] ?? 'N/A'); ?>" readonly>
+        <div class="profile-hero">
+            <div class="avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="hero-text">
+                <p class="eyebrow">Delivery Partner</p>
+                <h1><?php echo htmlspecialchars($row['fullname'] ?? 'N/A'); ?></h1>
+                <p class="status">Status: <strong><?php echo htmlspecialchars($row['status'] ?? 'N/A'); ?></strong></p>
+            </div>
         </div>
 
-        <div class="form-group">
-            <i class="fa-solid fa-location-dot"></i>
-            <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($row['address'] ?? 'N/A'); ?>" readonly>
+        <div class="profile-grid">
+            <div class="info-tile">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="info-body">
+                    <p class="info-label">Address</p>
+                    <p class="info-value"><?php echo htmlspecialchars($row['address'] ?? 'N/A'); ?></p>
+                </div>
+            </div>
+
+            <div class="info-tile">
+                <div class="info-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="info-body">
+                    <p class="info-label">Mobile</p>
+                    <p class="info-value"><?php echo htmlspecialchars($row['mobile'] ?? 'N/A'); ?></p>
+                </div>
+            </div>
+
+            <div class="info-tile">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="info-body">
+                    <p class="info-label">Email</p>
+                    <p class="info-value"><?php echo htmlspecialchars($row['email'] ?? 'N/A'); ?></p>
+                </div>
+            </div>
+
+            <div class="info-tile">
+                <div class="info-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div class="info-body">
+                    <p class="info-label">License No.</p>
+                    <p class="info-value"><?php echo htmlspecialchars($row['license'] ?? 'N/A'); ?></p>
+                </div>
+            </div>
+
+            <div class="info-tile">
+                <div class="info-icon"><i class="fa-solid fa-motorcycle"></i></div>
+                <div class="info-body">
+                    <p class="info-label">Vehicle</p>
+                    <p class="info-value"><?php echo htmlspecialchars($row['vehicle'] ?? 'N/A'); ?></p>
+                </div>
+            </div>
+
+            <div class="info-tile">
+                <div class="info-icon"><i class="fa-solid fa-credit-card"></i></div>
+                <div class="info-body">
+                    <p class="info-label">Vehicle Number</p>
+                    <p class="info-value"><?php echo htmlspecialchars($row['vehicle_number'] ?? 'N/A'); ?></p>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-            <input type="text" id="mobile" name="mobile" value="<?php echo htmlspecialchars($row['mobile'] ?? 'N/A'); ?>" readonly>
+        <div class="profile-actions">
+            <button class="btn-ghost" onclick="window.location.href='dp_dashboard.php';">Back to Dashboard</button>
+            <button class="btn-primary" onclick="window.location.href='edit_profile.php';">Edit Profile</button>
         </div>
-
-        <div class="form-group">
-            <i class="fa-solid fa-envelope"></i>
-            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($row['email'] ?? 'N/A'); ?>" readonly>
-        </div>
-
-        <div class="form-group">
-            <i class="fa-solid fa-id-card"></i>
-            <input type="text" id="licenseno" name="licenseno" placeholder="Enter license number" value="<?php echo htmlspecialchars($row['license'] ?? 'N/A'); ?>" readonly>
-        </div>
-
-        <div class="form-group">
-            <i class="fa-solid fa-car"></i>
-            <select id="inputState" class="form-select" name="vehicle" value="<?php echo htmlspecialchars($row['vehicle'] ?? 'N/A'); ?>" readonly>
-                    <option selected disabled>Choose Vehicle</option>
-                    <option value="Motorcycle">Motorcycle</option>
-                    <option value="Scooter">Scooter</option>
-                </select>
-        </div>
-
-        <div class="form-group">
-            <i class="fa-solid fa-credit-card"></i>
-            <input type="text" id="vehicleno" name="vehicleno" placeholder="Enter new vehicle number" value="<?php echo htmlspecialchars($row['vehicle_number'] ?? 'N/A'); ?>" readonly>
-        </div>
-
         <?php else: ?>
-            <p>No profile data found. Please contact the admin.</p>
+            <div class="profile-hero">
+                <div class="hero-text">
+                    <h1>No profile data found</h1>
+                    <p class="status">Please contact the admin.</p>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button class="btn-ghost" onclick="window.location.href='dp_dashboard.php';">Back to Dashboard</button>
+            </div>
         <?php endif; ?>
-
-        <button onclick="window.location.href='dp_dashboard.php';" 
-        style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none;
-        border-radius: 5px; cursor: pointer; text-decoration: none; margin-right: 10px;"
-        onmouseover="this.style.backgroundColor='#45a049';" onmouseout="this.style.backgroundColor='#4CAF50';">
-        Back
-        </button>
-        <button onclick="window.location.href='edit_profile.php';" 
-        style="padding: 10px 20px; background-color: #008CBA; color: white; border: none;
-        border-radius: 5px; cursor: pointer;" onmouseover="this.style.backgroundColor='#007B8F';"
-        onmouseout="this.style.backgroundColor='#008CBA';">
-        Edit Profile
-        </button>
     </div>
 </div>

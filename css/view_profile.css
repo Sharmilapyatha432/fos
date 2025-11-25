@@ -1,0 +1,182 @@
+/* Delivery person profile page styling */
+:root {
+    --primary: #4CAF50;
+    --secondary: #008CBA;
+    --text: #1f2d3d;
+    --muted: #6b7280;
+    --card-bg: #ffffff;
+    --surface: #f4f6f8;
+}
+
+body {
+    background: radial-gradient(circle at 20% 20%, rgba(76, 175, 80, 0.08), transparent 30%),
+                radial-gradient(circle at 80% 0%, rgba(0, 140, 186, 0.08), transparent 25%),
+                #eef2f5;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+}
+
+.profile-page {
+    width: min(1040px, 100%);
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+.profile-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+    overflow: hidden;
+    border: 1px solid rgba(31, 45, 61, 0.05);
+    width: 100%;
+}
+
+.profile-hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.08), rgba(0, 140, 186, 0.08));
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: var(--card-bg);
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+    color: var(--secondary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.hero-text h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.hero-text .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 6px 0;
+}
+
+.hero-text .status {
+    margin: 6px 0 0 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.hero-text .status strong {
+    color: var(--primary);
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 28px;
+    background: var(--surface);
+}
+
+.info-tile {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid rgba(31, 45, 61, 0.05);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(0, 140, 186, 0.08);
+    color: var(--secondary);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+}
+
+.info-body {
+    flex: 1;
+}
+
+.info-label {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+}
+
+.info-value {
+    margin: 2px 0 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    word-break: break-word;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 18px 24px 24px 24px;
+    background: var(--surface);
+}
+
+.btn-ghost, .btn-primary {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn-ghost {
+    background: var(--card-bg);
+    color: var(--text);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.btn-ghost:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--secondary), #0099d6);
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(0, 140, 186, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(0, 140, 186, 0.32);
+}
+
+@media (max-width: 640px) {
+    .profile-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .profile-actions {
+        flex-direction: column;
+    }
+    .btn-ghost, .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}

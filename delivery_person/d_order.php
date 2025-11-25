@@ -8,7 +8,6 @@ if (!isset($_SESSION['email'])) {
 }
 
 include('../database/connection.php');
-include('../delivery_person/layout/dheader.php');
 // include('../delivery_person/layout/sidebar.php');
 
 // Get delivery person's ID from session
@@ -39,21 +38,21 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Current Orders</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Delivered Orders</title>
+    <link rel="stylesheet" href="../css/admin_table.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Delivered Orders</h1>
-        
+    <?php include('../delivery_person/layout/dheader.php'); ?>
+    <div class="main-content">
+        <h2 align="center">Delivered Orders</h2>
+        <div class="table-wrapper">
         <?php if ($result->num_rows > 0): ?>
-            <table class="table table-bordered table-striped mt-4">
-                <thead class="thead-dark">
+            <table class="table">
+                <thead>
                     <tr>
                         <th>Order ID</th>
                         <th>Customer Name</th>
                         <th>Order Date</th>
-                        <!-- <th>Total Amount</th> -->
                         <th>Shipping Address</th>
                     </tr>
                 </thead>
@@ -63,19 +62,16 @@ $result = $stmt->get_result();
                             <td><?php echo htmlspecialchars($row['order_id']); ?></td>
                             <td><?php echo htmlspecialchars($row['customer_name']); ?></td>
                             <td><?php echo htmlspecialchars($row['order_date']); ?></td>
-                            <!-- <td><?php //echo htmlspecialchars($row['total_amount']); ?></td> -->
                             <td><?php echo htmlspecialchars($row['shipping_address']); ?></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
         <?php else: ?>
-            <p class="text-center">You have no new or pending orders.</p>
+            <p class="text-center">You have no delivered orders yet.</p>
         <?php endif; ?>
-
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

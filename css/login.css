@@ -1,216 +1,197 @@
+/* Shared login/signup styling for customers and delivery riders */
 body{
-    background-image: linear-gradient(#55a2d6, 
-    rgba(4,9,30,0.7));
-    /* background-size: cover;
-    background-position: center; */
-  }
-  
-  /* For Login */
-  .log {
+    margin: 0;
+    background: radial-gradient(circle at 18% 20%, rgba(10, 193, 221, 0.12), transparent 30%),
+                radial-gradient(circle at 78% 0%, rgba(0, 140, 186, 0.14), transparent 28%),
+                linear-gradient(135deg, #d9f2ee, #e9f7fb);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+/* Layout wrappers */
+.log, .logg, .loggg {
     display: flex;
     justify-content: center;
     align-items: center; 
-    height: max-content;
+    min-height: 100vh;
     margin: 0 auto;
-    padding: 100px;
-  }
-  /* End */
-  
-  /* For Registration */
-  .logg {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: max-content;
-    margin: 0 auto;
-    padding: 100px;
-  }
-  /* End */
-  
-  /* For Forget Password */
-  .loggg{
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: max-content;
-    margin: 0 auto;
-    padding: 170px;
-  }
-  /* End */
-  
-  .container {
+    padding: 40px 16px;
+    box-sizing: border-box;
+}
+.loggg { padding: 50px 16px; }
+
+.container {
     text-align: center;
-    padding: 20px;
-    background-image: linear-gradient(#176B87, rgba(4, 9, 30, 0.7));
-    /* background-color: #176B87; */
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    padding: 26px 26px 30px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 140, 186, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 18px 48px rgba(15, 48, 64, 0.12);
+    max-width: 440px;
     width: 100%;
-    /* margin: 20px; */
-  }
-  
-  .container h1 {
+}
+
+.container h1 {
+    margin-bottom: 18px;
+    font-size: 28px;
+    color: #0f3040;
+    position: relative;
+    letter-spacing: 0.5px;
+}
+
+/* Input groups */
+.group-login, .group-loginn {
+    position: relative;
+    width: 100%;
     margin-bottom: 20px;
-    font-size: 30px;
-    color: #000;
-    position: relative;
-  }
-  
-  /* For Login */
-  .group-login {
-    position: relative;
-    width: 100%;
-    margin-bottom: 25px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-
-.group-login i {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #ccc;
-    font-size: 16px;
 }
-  /* End */
-  
-  /* For Registration */
-  .group-loginn {
-    position: relative;
-    width: 100%;
-    margin-bottom: 12px;
-  }
-  
-  .labell {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
+.group-loginn { margin-bottom: 16px; }
 
-  .group-loginn i {
+label, .labell {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #4b5563;
+    text-align: left;
+}
+
+.group-login i,
+.group-loginn i {
     position: absolute;
-    left: 10px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #ccc;
+    color: #0a819b;
     font-size: 16px;
 }
 
-  /* End */
-  
-  input[type="text"],
+input[type="text"],
   input[type="tel"],
   input[type="email"],
   input[type="password"] {
     width: 100%;
-    padding: 10px 10px 10px 35px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px 12px 12px 38px;
+    border: 1px solid #cbd5e1;
+    background: #f7fafc;
+    color: #0f3040;
+    border-radius: 10px;
+    transition: border 0.15s ease, box-shadow 0.15s ease;
   }
-  
-  form a{
+
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    outline: none;
+    border-color: #0ac1dd;
+    box-shadow: 0 0 0 3px rgba(10, 193, 221, 0.15);
+  }
+
+form a{
     text-decoration: none;
-    color: #45a049;
-  }
-  
-  form a:hover {
+    color: #0a819b;
+    font-weight: 600;
+}
+
+form a:hover {
     text-decoration: underline;
-  }
-  
-  /* button css */
-  .button-group {
+}
+
+/* Buttons */
+.button-group {
     text-align: center;
-    margin-top: 10px;
-  }
-  
-  .button-group button{
+    margin-top: 14px;
+}
+
+.button-group button{
     flex-basis: 100%;
-    margin: 20px 0;
+    margin: 14px 0 6px 0;
     padding: 14px 20px;
-    border-radius: 15px;
+    border-radius: 12px;
     text-align: center;
-    background-color: #01896e;
-    color: #fff;
+    background: linear-gradient(135deg, #0ac1dd, #008cba);
+    color: #ffffff;
     border: none;
     outline: 0;
     cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
     }
-  
-  .button-group button:hover{
-    transform: scale(1.03);
-  }
-  
-  /* user selection */
-  .user-selects{
-    margin-top: 15px;
+
+.button-group button:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(0, 140, 186, 0.25);
+}
+
+/* user selection */
+.user-selects{
+    margin-top: 10px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     gap: 3%;
-  }
-  
-  .customer-part, .delivery_person-part{
+}
+
+.customer-part, .delivery_person-part{
     flex-basis: 50%;
     display: flex;
     align-items: center;
-  }
-  
-  .user-selects input[type="radio"]{
+}
+
+.user-selects input[type="radio"]{
     display: none;
     margin-right: 5px;
-  }
-  
-  .user-selects label{
-    border-radius: 50px;
-    padding: 10px 40px;
-    color: #01896e;
+}
+
+.user-selects label{
+    border-radius: 12px;
+    padding: 10px 16px;
+    color: #0a819b;
     width: 100%;
-    border: 2px solid #01896e;
-    transition: background 0.5s;
+    border: 1px solid #cbd5e1;
+    background: #f7fafc;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.12s ease, border 0.12s ease;
     cursor: pointer;
-  }
-  
-  .user-selects label:hover{
-    color: #fff;
-    background-color: #01896e;
-    transform: scale(1.03);
-  }
-  
-  .customer-part input[type="radio"]:checked +label,
-  .delivery_person-part input[type="radio"]:checked +label{
-    background-color: #01896e;
-    border-color: #01896e;
-    color: #fff;
-  }
-  /* end */
-  
-  .error-message{
-    /* background-color: #474846; */
-    color: #ff8482;
+    font-weight: 700;
+    text-align: center;
+}
+
+.user-selects label:hover{
+    color: #ffffff;
+    background: #0ac1dd;
+    border-color: #0ac1dd;
+    transform: translateY(-1px);
+}
+
+.customer-part input[type="radio"]:checked +label,
+.delivery_person-part input[type="radio"]:checked +label{
+    background: linear-gradient(135deg, #0ac1dd, #008cba);
+    border-color: #008cba;
+    color: #ffffff;
+}
+/* end */
+
+.error-message{
+    color: #b91c1c;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 7px;
-  }
-  
-  span{
-    color: #fff;
-  }
-  
-  /* Forget Password */
-  .back-button{
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.4);
+}
+
+span{
+    color: #374151;
+}
+
+/* Forget Password */
+.back-button{
     text-align: center;
     margin-top: 10px;
     display: flex;
     justify-content: center;
-  }
-  
-  .group-login .labelll input[type="email"]{
+}
+
+.group-login .labelll input[type="email"]{
     width: 50%
-  }
+}

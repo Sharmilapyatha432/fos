@@ -6,6 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include($_SERVER['DOCUMENT_ROOT'] . '/fos/customer/layout/layout.php');
 include('../database/connection.php');
+require_once __DIR__ . '/../algorithms/content_based_recommendations.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['email'])) {
@@ -14,6 +15,11 @@ if (!isset($_SESSION['email'])) {
 }
 
 $email = $_SESSION['email'];
+$customerId = $_SESSION['cid'] ?? null;
+$recommendations = [];
+if ($customerId) {
+    $recommendations = recommendForCustomer($conn, (int)$customerId, 4);
+}
 
 // Fetch all food items (Displaying food items in card view)
 $sql = "SELECT food_id, name, description, price, image FROM fooditem";
@@ -25,11 +31,67 @@ $result = $conn->query($sql);
 
 <!-- Link to Custom Card Styles -->
 <link rel="stylesheet" href="../css/card.css">
+<style>
+    html, body { background: var(--softGreenColor) !important; }
+    .main { background: var(--softGreenColor) !important; min-height: 100vh; }
+    .main-detail, .detail-wrapper { background: transparent; }
+</style>
 
 <!-- SweetAlert2 CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 <!-- Main Content for Food Items -->
+<?php if (!empty($recommendations)) { ?>
+<div class="main-detail">
+    <h1 class="main-title">Recommended for you</h1>
+    <div class="detail-wrapper">
+        <?php foreach ($recommendations as $rec) { ?>
+            <div class="detail-card">
+                <img src="../img/<?php echo !empty($rec['image']) ? htmlspecialchars($rec['image']) : 'path/to/default-image.jpg'; ?>" 
+                     class="detail-img" 
+                     alt="<?php echo htmlspecialchars($rec['name']); ?>" />
+                <div class="detail-desc">
+                    <div class="detail-name">
+                        <h4><?php echo htmlspecialchars($rec['name']); ?></h4>
+                        <p class="detail-sub"><?php echo htmlspecialchars($rec['description']); ?></p>
+                        <p class="price"><strong>Price: NRs.<?php echo htmlspecialchars($rec['price']); ?></strong></p>
+
+                        <form method="post" action="add_to_cart.php">
+                            <input type="hidden" name="food_id" value="<?php echo (int)$rec['id']; ?>">
+                            <input type="hidden" name="name" value="<?php echo htmlspecialchars($rec['name']); ?>">
+                            <input type="hidden" name="price" value="<?php echo htmlspecialchars($rec['price']); ?>">
+
+                            <div class="mb-3">
+                                <label for="rec_qty_<?php echo $rec['id']; ?>" class="form-label">Quantity:</label>
+                                <input
+                                    type="number"
+                                    name="quantity"
+                                    id="rec_qty_<?php echo $rec['id']; ?>"
+                                    class="form-control"
+                                    value="1"
+                                    min="1"
+                                    required
+                                >
+                            </div>
+
+                            <button type="submit" class="btn btn-warning w-100">
+                                Add to Cart
+                            </button>
+                        </form>
+                        <br>
+                        <button class="btn btn-warning w-100" 
+                                onclick="setProductDetails(<?php echo (int)$rec['id']; ?>, '<?php echo htmlspecialchars($rec['name'], ENT_QUOTES, 'UTF-8'); ?>', <?php echo (float)$rec['price']; ?>)">
+                            Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+<?php } ?>
+
+<div class="content-area">
 <div class="main-detail">
     <h1 class="main-title">Choose Orders</h1>
     <div class="detail-wrapper">
@@ -92,6 +154,7 @@ $result = $conn->query($sql);
             </div>
         <?php } ?>
     </div>
+</div>
 </div>
 
 <!-- Modal for Checkout -->

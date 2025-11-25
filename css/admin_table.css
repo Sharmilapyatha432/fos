@@ -12,6 +12,7 @@ body {
     box-shadow: 0 12px 32px rgba(15, 48, 64, 0.08);
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.08);
+    overflow: hidden;
 }
 
 h2 {
@@ -20,11 +21,13 @@ h2 {
     font-weight: 700;
     text-align: center;
     margin-bottom: 18px;
+    word-break: break-word;
 }
 
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
+    margin-top: 10px;
 }
 
 .table {
@@ -37,12 +40,15 @@ h2 {
     overflow: hidden;
     box-shadow: 0 8px 18px rgba(15, 48, 64, 0.05);
     border: 1px solid #d1d5db;
-    min-width: 720px;
+    min-width: 760px;
 }
 
 .table thead {
     background-color: #ffffff;
     color: #000;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 .table th, .table td {

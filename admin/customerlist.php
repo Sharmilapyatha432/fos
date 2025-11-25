@@ -99,6 +99,7 @@ include('../admin/layout/header.php');
     }
     ?>
 
+    <div class="table-wrapper">
     <table class="table">
         <thead>
             <tr>
@@ -139,6 +140,7 @@ include('../admin/layout/header.php');
             <?php } ?>
         </tbody>
     </table>
+    </div>
 </div>
 
 </body>

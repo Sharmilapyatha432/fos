@@ -17,6 +17,9 @@
         <div class="logo">
             <img src="../img/Biteblisss.png" alt="Logo" />
         </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
         <ul class="nav-links">
             <li><a href="adminpanel.php"><i class="fas fa-home"></i><span>Home</span></a></li>
             <li><a href="categories.php"><i class="fas fa-tachometer-alt"></i><span>Categories</span></a></li>
@@ -27,6 +30,15 @@
             <li><a href="adminlogout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></a></li>
         </ul>
     </nav>
+    <script>
+        const toggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        if (toggle && navLinks) {
+            toggle.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+            });
+        }
+    </script>
 </body>
 </html> 
 

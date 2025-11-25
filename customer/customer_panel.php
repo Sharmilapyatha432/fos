@@ -24,11 +24,17 @@ $result = $conn->query($sql);
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="../css/card.css">
+<style>
+    html, body { background: var(--softGreenColor) !important; }
+    .main { background: var(--softGreenColor) !important; min-height: 100vh; }
+    .main-detail, .detail-wrapper { background: transparent; }
+</style>
 
 <!-- SweetAlert2 CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 
+<div class="content-area">
 <div class="main-detail">
     <h1 class="main-title">Choose Orders</h1>
     <div class="detail-wrapper">
@@ -106,10 +112,11 @@ $result = $conn->query($sql);
         <?php } ?>
     </div> <!-- Close .detail-wrapper here -->
 </div> <!-- Close .main-detail here -->
+</div>
 
 <!-- Modal for Checkout -->
 <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="checkoutModalLabel">Place Order</h5>
@@ -117,50 +124,46 @@ $result = $conn->query($sql);
       </div>
 
       <div class="modal-body">
-        <form method="POST" action="placeorder.php">
+        <form method="POST" action="placeorder.php" class="row g-3">
             <!-- Hidden Food ID (will be populated by JS) -->
             <input type="hidden" name="food_id" id="food_id">
 
-            <div class="mb-3">
+            <div class="col-md-6">
                 <label for="order_name" class="form-label">Product Name</label>
                 <input type="text" id="order_name" class="form-control" disabled>
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-3">
                 <label for="order_price" class="form-label">Price</label>
                 <input type="text" id="order_price" class="form-control" disabled>
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-3">
                 <label for="order_quantity" class="form-label">Quantity</label>
                 <input type="number" name="quantity" id="order_quantity" class="form-control" min="1" required onchange="updateTotalPrice()">
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-4">
                 <label for="order_total_price" class="form-label">Total Price</label>
                 <input type="text" id="order_total_price" class="form-control" disabled>
             </div>
 
-            <!-- Shipping Address -->
-            <div class="mb-3">
+            <div class="col-md-8">
                 <label for="shipping_address" class="form-label">Shipping Address</label>
                 <textarea id="shipping_address" name="shipping_address" class="form-control" rows="3" required></textarea>
             </div>
 
-            <!-- City -->
-            <div class="mb-3">
+            <div class="col-md-6">
                 <label for="city" class="form-label">City</label>
                 <input type="text" name="city" id="city" class="form-control" required>
             </div>
 
-            <!-- Distance Field -->
-            <div class="mb-3">
+            <div class="col-md-6">
                 <label for="distance_from_restaurant" class="form-label">Distance (km)</label>
                 <input type="number" name="distance_from_restaurant" id="distance_from_restaurant" step="0.1" class="form-control" required>
             </div>
 
-            <!-- Payment Method -->
-            <div class="mb-3">
+            <div class="col-md-6">
                 <label for="payment_method" class="form-label">Payment Method</label>
                 <select id="payment_method" name="payment_method" class="form-select" required onchange="togglePaymentFields()">
                     <option value="cod">Cash on Delivery</option>
@@ -168,7 +171,9 @@ $result = $conn->query($sql);
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Confirm Order</button>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary w-100">Confirm Order</button>
+            </div>
         </form>
       </div> <!-- close modal-body -->
     </div> <!-- close modal-content -->

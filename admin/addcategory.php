@@ -49,79 +49,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Category</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/adminpanel.css">
-    <style>
-        .form-container {
-            max-width: 500px;
-            margin: 50px auto;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #00636E;
-        }
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button[type="submit"] {
-            background-color: #00636E;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-        button[type="submit"]:hover {
-            background-color: #004d58;
-        }
-        .back-button a {
-            color: white;
-            text-decoration: none;
-        }
-        .back-button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: inline-block;
-            text-align: center;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-        }
-        .back-button:hover {
-            background-color: #45a049;
-        }
-    </style>
+<link rel="stylesheet" href="../css/adminpanel.css">
+<link rel="stylesheet" href="../css/form.css">
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>Add Category</h2>
-        <form method="post" action="addcategory.php">
-            <div class="mb-3">
-                <label for="category">Category Name:</label>
-                <input type="text" name="category_name" placeholder="Enter Category Name" required>
-            </div>
-            <button type="submit">Add Category</button>
-            <div class="back-button">
-                <a href="categories.php">Back</a>
-            </div>
-        </form>
+    <div class="form-shell">
+        <div class="form-card">
+            <h2>Add Category</h2>
+            <form method="post" action="addcategory.php" class="form-grid">
+                <div class="form-field">
+                    <label for="category_name">Category Name</label>
+                    <input type="text" id="category_name" name="category_name" placeholder="Enter category name" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary-solid">Add Category</button>
+                    <button type="button" class="btn-ghost" onclick="window.location.href='categories.php'">Back</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

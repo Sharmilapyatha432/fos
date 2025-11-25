@@ -22,10 +22,17 @@ $total = 0;
     <title>My Cart</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body { background: var(--softGreenColor) !important; }
+        .main { background: var(--softGreenColor) !important; min-height: 100vh; }
+        .content-area { padding-top: 16px; }
+    </style>
 </head>
-<body class="p-4">
+<body>
 
-<h2>My Cart</h2>
+<div class="content-area">
+
+<h2 class="mb-3">My Cart</h2>
 
 <?php if (empty($cart)) : ?>
     <p>Your cart is empty.</p>
@@ -155,6 +162,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
+</div>
 
 </body>
 </html>

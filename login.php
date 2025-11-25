@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
     if ($userselects == "customer") {
         $sql = "SELECT cid, email, name, password FROM customer WHERE email = ?";
     } elseif ($userselects == "delivery_person") {
-        $sql = "SELECT dpid, email, fullname, password FROM delivery_person WHERE email = ?";
+        $sql = "SELECT dpid, email, fullname, password, status FROM delivery_person WHERE email = ?";
     }
 
     // Prepares the SQL statement, binds the email parameter, executes the statement, and retrieves the result.
@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
 
         if (password_verify($password, $hashedpassword)) {
             // Check if the counsellor is approved
-            if ($userselects == "delivery_person" && $row['status'] !== 'Approved') {
+            if ($userselects == "delivery_person" && ($row['status'] ?? null) !== 'Approved') {
                 // Display message and prevent login
                 // echo "Wait for admin approval. You cannot log in at the moment.";
                 echo '<script>
@@ -55,8 +55,12 @@ if (isset($_POST['login'])) {
             } else {
 
                 // Password matches, store user details in session
-                $_SESSION['cid'] = $row['cid'];
-                $_SESSION['dpid'] = $row['dpid'];
+                // Store role-specific identifiers
+                if ($userselects == "customer") {
+                    $_SESSION['cid'] = $row['cid'];
+                } elseif ($userselects == "delivery_person") {
+                    $_SESSION['dpid'] = $row['dpid'];
+                }
                 $_SESSION['email'] = $email;
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['fullname'] = $row['fullname'];

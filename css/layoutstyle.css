@@ -15,9 +15,14 @@
     outline: none;
 }
 
-body{
+html, body{
     width: 100%;
-    height: auto;
+    min-height: 100vh;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background-color: var(--softGreenColor);
+}
+
+body{
     display: flex;
 }
 
@@ -33,6 +38,12 @@ body{
     padding: 2%;
     background-color: var(--primaryColor);
     color: var(--whiteColor);
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+    display: block;
 }
 
 .sidebar-menus{
@@ -67,6 +78,14 @@ body{
     padding: 2%;
     background-color: var(--softGreenColor);
     margin-left: 250px ;
+    min-height: 100vh;
+}
+
+.content-area{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
 }
 
 .main-navbar{
@@ -121,16 +140,17 @@ body{
 }
 
 .cart, .user{
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     background-color: var(--whiteColor);
     font-size: 20px;
     color: var(--primaryColor);
     text-decoration: none;
-    padding: 0 10px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
+    padding: 0;
 }
 
 .cart:hover, .user:hover{

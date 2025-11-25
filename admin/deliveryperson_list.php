@@ -107,7 +107,7 @@ include('../admin/layout/header.php');
                 <th>Vehicle</th>
                 <th>Vehicle Number</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th class="action-col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -123,26 +123,25 @@ include('../admin/layout/header.php');
                     <td><?php echo htmlspecialchars($row['vehicle']); ?></td>
                     <td><?php echo htmlspecialchars($row['vehicle_number']); ?></td>
                     <td><?php echo htmlspecialchars($row['status']); ?></td>
-                    <td>
-                        <!-- Approve or Reject Delivery Person -->
-                        <form method="post" action="">
-                            <input type="hidden" name="dpid" value="<?php echo $row['dpid']; ?>">
-                            <select name="status" class="form-select" onchange="this.form.submit()"
-                                    <?php if ($row['status'] == 'Approved' || $row['status'] == 'Not Approved') echo 'disabled'; ?>>
-                                <option value="Pending" <?php if ($row['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
-                                <option value="Approved" <?php if ($row['status'] == 'Approved') echo 'selected'; ?>>Approved</option>
-                                <option value="Not Approved" <?php if ($row['status'] == 'Not Approved') echo 'selected'; ?>>Not Approved</option>
-                            </select>
-                        </form>
-                        <!-- Approve or Reject Delivery Person -->
-                        <form method="post" action=" " style="display:inline;">
-                                        <input type="hidden" value="<?php echo $row['dpid']; ?>" name="dpid" />
-                                        <input type="submit" class="btn-danger" value="Remove" name="delete"
-                                        onclick="return confirm('Are you sure you want to delete this category?');"
-                                        style="background-color: red; color: white; border: none; cursor: pointer;" 
-                                        onmouseover="this.style.backgroundColor='darkred';" 
-                                        onmouseout="this.style.backgroundColor='red';" />
-                                    </form>
+                    <td class="action-col">
+                        <div class="action-cell">
+                            <!-- Approve or Reject Delivery Person -->
+                            <form method="post" action="">
+                                <input type="hidden" name="dpid" value="<?php echo $row['dpid']; ?>">
+                                <select name="status" class="form-select" onchange="this.form.submit()"
+                                        <?php if ($row['status'] == 'Approved' || $row['status'] == 'Not Approved') echo 'disabled'; ?>>
+                                    <option value="Pending" <?php if ($row['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
+                                    <option value="Approved" <?php if ($row['status'] == 'Approved') echo 'selected'; ?>>Approved</option>
+                                    <option value="Not Approved" <?php if ($row['status'] == 'Not Approved') echo 'selected'; ?>>Not Approved</option>
+                                </select>
+                            </form>
+                            <!-- Approve or Reject Delivery Person -->
+                            <form method="post" action=" ">
+                                <input type="hidden" value="<?php echo $row['dpid']; ?>" name="dpid" />
+                                <input type="submit" class="btn-danger" value="Remove" name="delete"
+                                onclick="return confirm('Are you sure you want to delete this category?');" />
+                            </form>
+                        </div>
                     </td>
 
                 </tr>

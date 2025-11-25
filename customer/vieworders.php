@@ -11,8 +11,7 @@ if (!isset($_SESSION['cid'])) {
     exit();
 }
 
-// $email = $_SESSION['email'];  // Get the customer ID (cid) from the session
-$customer_id = $_SESSION['cid']; // or get it from a login system
+$customer_id = (int)$_SESSION['cid'];
 
 
 include('../database/connection.php');  // Database connection
@@ -25,24 +24,28 @@ $order_query = "SELECT o.order_id, o.total_amount, o.delivery_status,
                 FROM orders o 
                 JOIN orderdetails od ON o.order_id = od.order_id
                 JOIN fooditem f ON od.food_id = f.food_id
-                WHERE o.cid = (SELECT cid FROM Customer WHERE email = ?) 
+                WHERE o.cid = ?
                 ORDER BY o.order_id DESC;";  // Fetch orders for the logged-in customer
 
 // Prepare and execute the query
 $stmt = $conn->prepare($order_query);
-$stmt->bind_param('s', $email);  // Bind the customer ID to the query (i = integer)
+$stmt->bind_param('i', $customer_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
 
 <link rel="stylesheet" href="../css/admin_table.css">
+<style>
+    html, body { background: var(--softGreenColor) !important; }
+    .main { background: var(--softGreenColor) !important; min-height: 100vh; }
+</style>
+<div class="content-area">
 <div class="main-content">
     <h2 style="text-align: center; padding: 20px;">My Orders</h2>
     <div class="table-wrapper">
-        <!-- Back to Dashboard Button -->
         <button onclick="window.location.href='viewfooditem.php';" 
-        style="padding: 15px 20px; background-color: #4CAF50; color: white; border: none;
-        border-radius: 5px; cursor: pointer; text-decoration: none; margin-bottom: 10px;">
+        style="padding: 12px 16px; background-color: #4CAF50; color: white; border: none;
+        border-radius: 8px; cursor: pointer; text-decoration: none; margin-bottom: 10px;">
         Back to Dashboard
         </button>
 
@@ -56,7 +59,6 @@ $result = $stmt->get_result();
                 <th>Quantity</th>
                 <th>Total Amount</th>
                 <th>Food Image</th>
-                <th>Estimated Delivery Time</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -73,7 +75,6 @@ $result = $stmt->get_result();
                         <td><?php echo htmlspecialchars($order['quantity']); ?></td>
                         <td><?php echo number_format($order['quantity'] * $order['item_price'], 2); ?></td>
                         <td><img src="../img/<?php echo htmlspecialchars($order['image']); ?>" alt="Food Image" width="100"></td>
-                        <td><?php echo ($order['estimated_delivery_time']); ?></td>
                         <td><?php echo htmlspecialchars($order['delivery_status']); ?></td>
                     </tr>
                 <?php }
@@ -83,21 +84,14 @@ $result = $stmt->get_result();
             ?>
         </tbody>
     </table>
-</div>
-</div>
-</div>
-</div>
-        </div>
     </div>
-</body>
+</div>
+</div>
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg-com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <!-- adding javascript -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="../../js/app.js"></script>
 </body>
 </html>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
