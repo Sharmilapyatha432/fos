@@ -17,7 +17,7 @@
         <!-- List of menus -->
         <div class="sidebar-menus">
             <a href="customer_panel.php"><ion-icon name="storefront-outline"></ion-icon>Home</a>
-            <a href="viewfooditem.php"><ion-icon name="pizza-outline"></ion-icon>Food Items</a>
+            <!-- <a href="viewfooditem.php"><ion-icon name="pizza-outline"></ion-icon>Food Items</a> -->
             <a href="cart.php"><ion-icon name="cart-outline"></ion-icon>My Cart</a>
             <a href="vieworders.php"><ion-icon name="bag-handle-outline"></ion-icon> My Orders</a>
         </div>
