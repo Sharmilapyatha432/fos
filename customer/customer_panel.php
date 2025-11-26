@@ -172,7 +172,8 @@ $result = $conn->query($sql);
             </div>
 
             <div class="col-12">
-                <button type="submit" class="btn btn-primary w-100">Confirm Order</button>
+                <!-- <button type="submit" class="btn btn-primary w-100">Confirm Order</button> -->
+                <button type="button" class="btn btn-primary w-100" onclick="confirmOrderPopup()">Confirm Order</button>
             </div>
         </form>
       </div> <!-- close modal-body -->
@@ -182,18 +183,58 @@ $result = $conn->query($sql);
 
 <?php //include('customer/layout/cfooter.php'); ?>
 
-</body>
+<!-- JS LIBRARIES (keep these first) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-<!-- Bootstrap bundle (required for modal to work) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Your custom JS -->
 <script src="../js/checkout.js"></script>
 <script src="../js/app.js"></script>
+
+<!-- YOUR SWEETALERT CONFIRM BEFORE SUBMIT -->
+<script>
+function confirmOrderPopup() {
+    let distance = parseFloat(document.getElementById("distance_from_restaurant").value);
+    let qty = parseInt(document.getElementById("order_quantity").value);
+    let price = parseFloat(document.getElementById("order_price").value);
+
+    if (!distance || !qty || !price) {
+        Swal.fire("Error", "Please fill all required fields.", "error");
+        return;
+    }
+
+    let eta = distance <= 5 ? 45 : 45 + ((distance - 5) * 5);
+    let total = qty * price;
+
+    Swal.fire({
+        title: "Confirm Order?",
+        html: `
+            <b>Total Price:</b> NRs. ${total}<br>
+            <b>Estimated Delivery Time:</b> ${eta} minutes
+        `,
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Place Order",
+        cancelButtonText: "Cancel"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.querySelector("#checkoutModal form").submit();
+        }
+    });
+}
+</script>
+
+<!-- SWEETALERT AFTER REDIRECT -->
+<?php if (isset($_SESSION['message'])): ?>
+<script>
+Swal.fire({
+    icon: "<?php echo $_SESSION['message']['type']; ?>",
+    title: "<?php echo ($_SESSION['message']['type'] === 'success') ? 'Success' : 'Error'; ?>",
+    html: "<?php echo $_SESSION['message']['text']; ?>",
+    confirmButtonText: "OK"
+});
+</script>
+<?php unset($_SESSION['message']); endif; ?>
 
 </html>

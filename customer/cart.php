@@ -164,6 +164,17 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 </div>
+<?php if (isset($_SESSION['message'])): ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+Swal.fire({
+    icon: "<?php echo $_SESSION['message']['type']; ?>",
+    title: "<?php echo ($_SESSION['message']['type'] === 'success') ? 'Success' : 'Error'; ?>",
+    html: "<?php echo $_SESSION['message']['text']; ?>",
+    confirmButtonText: "OK"
+});
+</script>
+<?php unset($_SESSION['message']); endif; ?>
 
 </body>
 </html>
