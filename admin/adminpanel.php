@@ -51,6 +51,7 @@ if (!$orders) {
 <!-- <link rel="stylesheet" href="../css/adminpanel.css"> -->
 <div class="main-content">
     <h2 align="center">Orders List</h2>
+    <div class="table-wrapper">
     <table class="table">
         <thead>
             <tr>
@@ -92,4 +93,5 @@ if (!$orders) {
         <?php } ?>
         </tbody>
     </table>
+    </div>
 </div>

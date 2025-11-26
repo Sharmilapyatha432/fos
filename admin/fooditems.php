@@ -30,8 +30,8 @@ $result = $conn->query($sql);
 ?>
 
 <link rel="stylesheet" href="../css/admin_table.css"> <!--CSS link for table-->
-<div class="main_content">
-    <h2 align="center" style="padding:10px">Food Item List</h2>
+<div class="main-content">
+    <h2>Food Item List</h2>
     <div class="table-wrapper">
         <form action="add_fooditem.php" method="post">
             <input type="submit" value="Add Food" name="add">
@@ -60,7 +60,7 @@ $result = $conn->query($sql);
                             <td><?php echo $row['description']; ?></td>
                             <td><?php echo $row['price']; ?></td>
                             <td>
-                                <div class="button-row">
+                                <div class="action-cell">
                                     <form method="post" action="editfooditem.php">
                                         <input type="hidden" value="<?php echo $row['food_id']; ?>" name="food_id" />
                                         <input type="submit" value="Edit" name="edit" />

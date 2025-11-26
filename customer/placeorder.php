@@ -2,6 +2,7 @@
 <?php
 session_start();
 include('../database/connection.php');
+require_once __DIR__ . '/../algorithms/delivery_assignment_load_balance.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['cid'])) {
@@ -54,12 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['food_id']) && isset($_POST['quantity']) && isset($_POST['shipping_address']) && isset($_POST['city']) && isset($_POST['distance_from_restaurant'])) {
         
         // Sanitize and validate inputs
-        // echo "hfjsdhfkjsdhfkjdfhgkjdfs fbgkdfhsjkghsf sdbgjfhk";
         $food_id = filter_var($_POST['food_id'], FILTER_VALIDATE_INT);
         $quantity = filter_var($_POST['quantity'], FILTER_VALIDATE_INT);
         $shipping_address = htmlspecialchars(trim($_POST['shipping_address']));
         $city = htmlspecialchars(trim($_POST['city']));
         $distance_from_restaurant = filter_var($_POST['distance_from_restaurant'], FILTER_VALIDATE_FLOAT);
+        $payment_method = $_POST['payment_method'] ?? 'cod';
+        $payment_method_label = ($payment_method === 'cod') ? 'Cash on Delivery' : 'Other';
 
         if ($food_id === false || $quantity === false || empty($shipping_address) || empty($city)  || $distance_from_restaurant === false) {
             $_SESSION['message'] = [
@@ -90,11 +92,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $delivery_time = ($distance_from_restaurant <= 5) ? 45 : 45 + ($distance_from_restaurant - 5) * 5;   //For each additional kilometer, an additional 5 minutes is added.
 
                 // Insert the order into the orders table
-                $sql_order = "INSERT INTO orders (cid, total_amount, shipping_address, city, delivery_status, distance, estimated_delivery_time)
-                                VALUES (?, ?, ?, ?, 'pending', ?, ?)";
+                $sql_order = "INSERT INTO orders (cid, total_amount, shipping_address, city, delivery_status, payment_method)
+                                VALUES (?, ?, ?, ?, 'Pending', ?)";
                 $stmt_order = $conn->prepare($sql_order);
-                $stmt_order->bind_param("idssdi", $customer_id, $total_amount, $shipping_address, $city, $distance_from_restaurant, $delivery_time); // Match the parameters correctly
-                $stmt_order->execute();
+                $stmt_order->bind_param("idsss", $customer_id, $total_amount, $shipping_address, $city, $payment_method_label);
+                if (!$stmt_order->execute()) {
+                    throw new Exception('Failed to insert order');
+                }
 
                 // Get the last inserted order ID
                 $order_id = $conn->insert_id;
@@ -104,18 +108,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 VALUES (?, ?, ?, ?)";
                 $stmt_order_item = $conn->prepare($sql_order_item);
                 $stmt_order_item->bind_param("iiid", $order_id, $food_id, $quantity, $food['price']);
-                $stmt_order_item->execute();
+                if (!$stmt_order_item->execute()) {
+                    throw new Exception('Failed to insert order item');
+                }
 
                 // Add order notification for delivery person
                 // addOrderNotification($conn, $order_id, $email);
+
+                // Try to assign a delivery person (non-fatal if none available)
+                $assignment = assignOrderToDriver($conn, $order_id);
 
                 // Commit the transaction
                 $conn->commit();
 
                 // Set success message in session
+                $assignmentNote = $assignment['assigned']
+                    ? (' Assigned to: ' . ($assignment['driver']['fullname'] ?? 'delivery person') . '.')
+                    : ' We will assign a delivery person shortly.';
                 $_SESSION['message'] = [
                     'type' => 'success',
-                    'text' => 'Your order has been placed successfully. Estimated delivery time: ' . $delivery_time . ' minutes.'
+                    'text' => 'Your order has been placed successfully. Estimated delivery time: ' . $delivery_time . ' minutes.' . $assignmentNote
                 ];
             } else {
                 // Rollback transaction if food item is not available
@@ -148,6 +160,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $shipping_address = htmlspecialchars(trim($_POST['shipping_address']));
         $city = htmlspecialchars(trim($_POST['city']));
         $distance_from_restaurant = filter_var($_POST['distance_from_restaurant'], FILTER_VALIDATE_FLOAT);
+        $payment_method = $_POST['payment_method'] ?? 'cod';
+        $payment_method_label = ($payment_method === 'cod') ? 'Cash on Delivery' : 'Other';
 
         if (empty($shipping_address) || empty($city) || $distance_from_restaurant === false) {
             $_SESSION['message'] = [
@@ -183,11 +197,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $delivery_time = ($distance_from_restaurant <= 5) ? 45 : 45 + ($distance_from_restaurant - 5) * 5;   //For each additional kilometer, an additional 5 minutes is added.
 
             // Insert the order into the orders table
-            $sql_order = "INSERT INTO orders (cid, total_amount, shipping_address, city, delivery_status, distance, estimated_delivery_time)
-                            VALUES (?, ?, ?, ?, 'pending', ?, ?)";
+            $sql_order = "INSERT INTO orders (cid, total_amount, shipping_address, city, delivery_status, payment_method)
+                            VALUES (?, ?, ?, ?, 'Pending', ?)";
             $stmt_order = $conn->prepare($sql_order);
-            $stmt_order->bind_param("idssdi", $customer_id, $total_amount, $shipping_address, $city, $distance_from_restaurant, $delivery_time);
-            $stmt_order->execute();
+            $stmt_order->bind_param("idsss", $customer_id, $total_amount, $shipping_address, $city, $payment_method_label);
+            if (!$stmt_order->execute()) {
+                throw new Exception('Failed to insert order');
+            }
 
             // Get the last inserted order ID
             $order_id = $conn->insert_id;
@@ -203,8 +219,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $price = (float)$item['price'];
 
                 $stmt_order_item->bind_param("iiid", $order_id, $food_id, $quantity, $price);
-                $stmt_order_item->execute();
+                if (!$stmt_order_item->execute()) {
+                    throw new Exception('Failed to insert order item');
+                }
             }
+
+            // Try to assign a delivery person (non-fatal if none available)
+            $assignment = assignOrderToDriver($conn, $order_id);
 
             // Commit the transaction
             $conn->commit();
@@ -213,9 +234,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             unset($_SESSION['cart']);
 
             // Set success message in session
+            $assignmentNote = $assignment['assigned']
+                ? (' Assigned to: ' . ($assignment['driver']['fullname'] ?? 'delivery person') . '.')
+                : ' We will assign a delivery person shortly.';
             $_SESSION['message'] = [
                 'type' => 'success',
-                'text' => 'Your order has been placed successfully. Estimated delivery time: ' . $delivery_time . ' minutes.'
+                'text' => 'Your order has been placed successfully. Estimated delivery time: ' . $delivery_time . ' minutes.' . $assignmentNote
             ];
 
         } catch (Exception $e) {

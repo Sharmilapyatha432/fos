@@ -2,8 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fix the font URL typo here -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@480;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/layoutstyle.css">
     <title>Dashboard</title>
 </head>
@@ -11,7 +11,9 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Logo -->
-        <h1 class="logo">BITEBLISS</h1>
+        <h1 class="logo">
+            <img src="../img/Biteblisss.png" alt="BiteBliss Logo">
+        </h1>
         <!-- List of menus -->
         <div class="sidebar-menus">
             <a href="customer_panel.php"><ion-icon name="storefront-outline"></ion-icon>Home</a>

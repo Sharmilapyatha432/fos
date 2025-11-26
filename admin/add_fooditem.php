@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Food Items</title>
-</head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/adminpanel.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 </head>
 <body>
 
@@ -71,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-    <?php if (isset($_SESSION['message'])): ?>
+<?php if (isset($_SESSION['message'])): ?>
         <script>
             swal({
                 title: "<?php echo $_SESSION['msg_type'] == 'success' ? 'Success' : 'Error'; ?>",
@@ -79,9 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 icon: "<?php echo $_SESSION['msg_type'] == 'success' ? 'success' : 'error'; ?>",
                 button: "OK",
             }).then(() => {
-                // Redirect if success
                 <?php if ($_SESSION['msg_type'] == 'success'): ?>
-                    window.location.href = "fooditems.php"; // Redirect to the product list page
+                    window.location.href = "fooditems.php";
                 <?php endif; ?>
             });
         </script>
@@ -89,38 +89,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php unset($_SESSION['msg_type']); ?>
     <?php endif; ?>
 
-
-<link rel="stylesheet" href="../css/form.css">
-<form method="post" action="add_fooditem.php" enctype="multipart/form-data" autocomplete="off">
-    <div class="container">
-        <label for="productname">Food Name</label>
-        <input type="text" name="name" placeholder="Enter Food Name" required>
-
-        <label for="productdescription">Food Description</label>
-        <textarea name="description" placeholder="Enter Food Description"></textarea>
-
-        <label for="price">Price</label>
-        <input type="number" name="price" placeholder="Price" required>
-
-        <label for="category">Category</label>
-        <select name="category_id" required>
-            <!-- Loop through categories dynamically -->
-            <?php
-            $category_query = "SELECT * FROM foodcategory";
-            $categories = mysqli_query($conn, $category_query);
-            echo "<option value='choose' disabled selected>Select Category</option>";
-            while ($category = mysqli_fetch_assoc($categories)) {
-                echo "<option value='{$category['category_id']}'>{$category['category_name']}</option>";
-            }
-            ?>
-        </select>
-
-        <label for="image">Food Image</label>
-        <input type="file" name="image" accept="image/*" required>
-        
-        <button type="submit">Add Product</button>
-        <button><a href="fooditems.php">Back</a></button>
+<div class="form-shell">
+    <div class="form-card">
+        <h2>Add Food Item</h2>
+        <form method="post" action="add_fooditem.php" enctype="multipart/form-data" autocomplete="off" class="form-grid">
+            <div class="form-field">
+                <label for="name">Food Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter food name" required>
+            </div>
+            <div class="form-field">
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" placeholder="Price" required>
+            </div>
+            <div class="form-field">
+                <label for="category_id">Category</label>
+                <select id="category_id" name="category_id" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <?php
+                    $category_query = "SELECT * FROM foodcategory";
+                    $categories = mysqli_query($conn, $category_query);
+                    while ($category = mysqli_fetch_assoc($categories)) {
+                        echo "<option value='{$category['category_id']}'>{$category['category_name']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-field" style="grid-column: 1 / -1;">
+                <label for="description">Food Description</label>
+                <textarea id="description" name="description" placeholder="Enter food description"></textarea>
+            </div>
+            <div class="form-field">
+                <label for="image">Food Image</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <span class="hint">JPG, JPEG, PNG, GIF allowed.</span>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-primary-solid">Add Product</button>
+                <button type="button" class="btn-ghost" onclick="window.location.href='fooditems.php'">Back</button>
+            </div>
+        </form>
     </div>
-</form>
+</div>
 </body>
 </html>
